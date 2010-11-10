@@ -6,16 +6,16 @@ void keyboard(unsigned char key, int x, int y) {
 	switch(key)
 	{	
 	// slide controls for camera
-		case 's': 
+		case 'w': 
 			cam.slide(0,0,-0.2); 
 			break;    // slide camera forward
-		case 'x': 
+		case 's': 
 			cam.slide(0,0, 0.2);
 			break;    // slide camera back	
-		case 'z': 
+		case 'a': 
 			cam.slide(-0.2, 0, 0);
 			break;  // slide camera left
-		case 'c': 
+		case 'd': 
 			cam.slide(0.2, 0, 0);
 			break;   // slide camera right
 		case '+':
@@ -62,49 +62,35 @@ void keyboard(unsigned char key, int x, int y) {
 		case '9': 
 			planets[key-49].toggle();
 			break;
-		case 'q': 
-			planets[0].toggleOrbit();
-			break;
-		case 'w': 
-			planets[1].toggleOrbit();
-			break;
-		case 'e': 
-			planets[2].toggleOrbit();
-			break;
-		case 'r': 
-			planets[3].toggleOrbit();
-			break;
-		case 't': 
-			planets[4].toggleOrbit();
-			break;
-		case 'y': 
-			planets[5].toggleOrbit();
-			break;
-		case 'u': 
-			planets[6].toggleOrbit();
-			break;
-		case 'i': 
-			planets[7].toggleOrbit();
-			break;
 		case 'o': 
-			planets[8].toggleOrbit();
+			for( int i = 0; i < NUM_PLANETS; i++ ) {
+				planets[i].toggleOrbit();
+			}
 			break;
-						
+		
 		case '<': 
 			if( hourIncrement <= 0.0 ) {
 				hourIncrement = 0.0;
 			} else {
-				hourIncrement -= 0.1;
+				hourIncrement -= 0.05;
 			}
 			printf("hourIncrement: %f\n", hourIncrement);
 			break;
 		case '>':
-			hourIncrement += 0.1;
+			if( hourIncrement >= 23.0 ) {
+				hourIncrement = 23.0;
+			} else {
+				hourIncrement += 0.05;
+			}
 			printf("hourIncrement: %f\n", hourIncrement);
 			break;
 		
 		case ';':
-			planetRadiusScale -= .000001;
+			if( planetRadiusScale <= 0.0 ) {
+				planetRadiusScale = 0.0;
+			} else {
+				planetRadiusScale -= .000001;
+			}
 			printf("planetRadiusScale: %f\n", planetRadiusScale);
 			break;
 		case '\'':
@@ -113,7 +99,11 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		
 		case ',':
-			orbitScale -= .00000001;
+			if( orbitScale <= 0.0 ) {
+				orbitScale = 0.0;
+			} else {
+				orbitScale -= .00000001;
+			}
 			printf("orbitScale: %f\n", orbitScale);
 			break;
 		case '.':

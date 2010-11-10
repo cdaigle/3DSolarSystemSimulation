@@ -46,7 +46,7 @@ void Planet :: draw() {
 
 //Draws the circle that represents the orbit. (if the planet is enabled)
 void Planet :: drawOrbit() {
-	if( orbitEnabled == true ) {
+	if( enabled == true && orbitEnabled == true ) {
 		glPushMatrix();
 			glBegin(GL_LINE_STRIP);
 				for( double i = -PI; i <= PI; i+= PI/200 ) {
@@ -63,6 +63,7 @@ void Planet :: toggle() {
 	enabled = !enabled;
 }
 
+//Toggles whether or not to draw the orbit.  Triggered by 'o'.  Note: Planet must be enabled as well
 void Planet :: toggleOrbit() {
 	orbitEnabled = !orbitEnabled;
 }

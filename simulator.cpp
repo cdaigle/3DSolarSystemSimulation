@@ -6,9 +6,9 @@
 // allows the circular motion of the planets
 void incrementTime() {
 	hoursPassedToday += hourIncrement;
-	if( hoursPassedToday > 23 ) {
+	if( hoursPassedToday >= 23.0 ) {
 		daysPassed += 1;
-		hoursPassedToday = 0;
+		hoursPassedToday = 0.0;
 	}
 	
 }

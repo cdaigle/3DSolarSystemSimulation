@@ -19,7 +19,6 @@ using namespace std;
 //Global values
 double static hoursPassedToday = -1.0;
 int static daysPassed = 0;
-
 double static hourIncrement = 1.0;
 
 bool static simulationRunning = false;
