@@ -14,10 +14,10 @@ void Sphere :: draw(double radiusScale) {
 	gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);	// Linear Filtering
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-        	//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-       		//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-		//glEnable(GL_TEXTURE_GEN_S);
-		//glEnable(GL_TEXTURE_GEN_T);
+        //glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+       	//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+	//glEnable(GL_TEXTURE_GEN_S);
+	//glEnable(GL_TEXTURE_GEN_T);
 	glBindTexture(GL_TEXTURE_2D,textureId);
 	glPushMatrix();
 	glTranslated(currentPosition.x, currentPosition.y, currentPosition.z);
