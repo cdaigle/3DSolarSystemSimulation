@@ -3,7 +3,12 @@
  */
 
 #define NUM_PLANETS 9
+#define NUM_VIEWMODES 2
 
+ViewMode viewModes[NUM_VIEWMODES] = {
+	ViewMode(),
+	ViewMode()
+};
 Camera cam;
 
 //Radius, orbit, albeldo, texturePath, 

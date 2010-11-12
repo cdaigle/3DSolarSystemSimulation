@@ -24,7 +24,7 @@ class Sphere{
 		double scaleOrbit(void);
 		string getTexturePath(void){ return texturePath; }
 		string getName(void) { return name; }
-		double getRadius(void) { return radius * radiusScale; }
+		double getRadius(double radiusScale) { return radius * radiusScale; }
 
 		void setCurrentPosition(Point3 point){ currentPosition.set(point); }
 		void setCurrentPosition(double x, double y, double z){ currentPosition.set(x,y,z);}
