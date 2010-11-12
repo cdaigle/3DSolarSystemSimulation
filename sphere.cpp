@@ -19,18 +19,19 @@ void Sphere :: draw(double radiusScale) {
 	//glEnable(GL_TEXTURE_GEN_S);
 	//glEnable(GL_TEXTURE_GEN_T);
 	glBindTexture(GL_TEXTURE_2D,textureId);
+
 	glPushMatrix();
-	glTranslated(currentPosition.x, currentPosition.y, currentPosition.z);
-	glRotated (90, 1, 0, 0);
-	gluSphere(quadratic, radius*radiusScale, 20, 20);
+		glTranslated(currentPosition.x, currentPosition.y, currentPosition.z);
+		glRotated (90, 1, 0, 0);
+		gluSphere(quadratic, radius*radiusScale, 20, 20);
 	glPopMatrix();	
-   
-   glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_DEPTH_TEST);
 
 	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 }
 
 //Returns the scaled orbit distance
 double Sphere :: scaleOrbit() {
-	return orbitingDistance * orbitScale;
+	return orbitingDistance * viewModes[currentViewMode].getOrbitScale();
 }

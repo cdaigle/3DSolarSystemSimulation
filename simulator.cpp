@@ -5,10 +5,11 @@
 //Allows us to increment the time when simulation is called
 // allows the circular motion of the planets
 void incrementTime() {
-	hoursPassedToday += hourIncrement;
+	hoursPassedToday += viewModes[currentViewMode].getHourIncrement();
+	hoursPassed += viewModes[currentViewMode].getHourIncrement();
 	if( hoursPassedToday >= 23.0 ) {
 		daysPassed += 1;
-		hoursPassedToday = 0.0;
+		hoursPassedToday -= 23.0;
 	}
 	
 }

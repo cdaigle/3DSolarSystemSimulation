@@ -69,46 +69,28 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		
 		case '<': 
-			if( hourIncrement <= 0.0 ) {
-				hourIncrement = 0.0;
-			} else {
-				hourIncrement -= 0.05;
-			}
-			printf("hourIncrement: %f\n", hourIncrement);
+			viewModes[currentViewMode].decrementHourIncrement();
 			break;
 		case '>':
-			if( hourIncrement >= 23.0 ) {
-				hourIncrement = 23.0;
-			} else {
-				hourIncrement += 0.05;
-			}
-			printf("hourIncrement: %f\n", hourIncrement);
+			viewModes[currentViewMode].incrementHourIncrement();
 			break;
-		
 		case ';':
-			if( planetRadiusScale <= 0.0 ) {
-				planetRadiusScale = 0.0;
-			} else {
-				planetRadiusScale -= .000001;
-			}
-			printf("planetRadiusScale: %f\n", planetRadiusScale);
+			viewModes[currentViewMode].decrementPlanetRadiusScale();
 			break;
 		case '\'':
-			planetRadiusScale += .000001;
-			printf("planetRadiusScale: %f\n", planetRadiusScale);
+			viewModes[currentViewMode].incrementPlanetRadiusScale();
 			break;
-		
 		case ',':
-			if( orbitScale <= 0.0 ) {
-				orbitScale = 0.0;
-			} else {
-				orbitScale -= .00000001;
-			}
-			printf("orbitScale: %f\n", orbitScale);
+			viewModes[currentViewMode].decrementOrbitScale();
 			break;
 		case '.':
-			orbitScale += .00000001;
-			printf("orbitScale: %f\n", orbitScale);
+			viewModes[currentViewMode].incrementOrbitScale();
+			break;
+
+		case 'p':
+			printf("hourIncrement: %f\n", viewModes[currentViewMode].getHourIncrement());
+			printf("planetRadiusScale: %f\n", viewModes[currentViewMode].getPlanetRadiusScale());
+			printf("orbitScale: %f\n", viewModes[currentViewMode].getOrbitScale());
 			break;
 	}
 	glutPostRedisplay(); //draw it again

@@ -6,10 +6,16 @@
 #define NUM_VIEWMODES 2
 
 ViewMode viewModes[NUM_VIEWMODES] = {
-	ViewMode(),
-	ViewMode()
+	ViewMode("SolarSystemView", 0.000065, 0.000001, 0.000009, 0.0, 0.00000013, 0.00000001, 1000.0, 50.0),
+	ViewMode("EarthView", 0.000065, 0.000001, 0.000009, 0.0, 0.00000013, 0.00000001, 1000.0, 50.0)
 };
+
 Camera cam;
+
+#include "sphere.cpp"
+#include "star.cpp"
+#include "planet.cpp"
+#include "moon.cpp"
 
 //Radius, orbit, albeldo, texturePath, 
 Star Sun("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp");                                         //Sun

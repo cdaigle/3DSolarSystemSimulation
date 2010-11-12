@@ -18,22 +18,15 @@ using namespace std;
 
 //Global values
 double static hoursPassedToday = -1.0;
+double static hoursPassed = -1.0;
 int static daysPassed = 0;
-double static hourIncrement = 1.0;
 
 bool static simulationRunning = false;
 
-double static starRadiusScale = .000009;
-double static planetRadiusScale = .000065;
-double static orbitScale = .00000013;
-
-
+int static currentViewMode = 0;
 
 #include "supportingClasses.cpp"
-#include "sphere.cpp"
-#include "star.cpp"
-#include "planet.cpp"
-#include "moon.cpp"
+#include "ViewMode.cpp"
 #include "RGBpixmap.h"
 #include "camera.cpp"
 #include "init.cpp"

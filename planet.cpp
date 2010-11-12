@@ -4,8 +4,6 @@
  */
 #include "planet.h"
 
-#define DAYS_TO_ORBIT_SCALE 365
-
 double Planet :: getOrbitX(double theta) {
 	double x = cos(theta);
 	return x*getSemiMajorAxis();
@@ -31,8 +29,7 @@ double Planet :: getSemiMinorAxis() {
 
 //Calculates the new position of the planet, based on the circularTime
 void Planet :: move() {
-	double scale = (double) DAYS_TO_ORBIT_SCALE / daysToOrbit;
-	double orbitPosition = scale*(daysPassed % (int) daysToOrbit);
+	double orbitPosition = ((hoursPassed / 24) / daysToOrbit);
 	double theta = orbitPosition*DEG2RAD;
 	setCurrentPosition(getOrbitX(theta),getOrbitY(),getOrbitZ(theta));
 }
@@ -40,7 +37,7 @@ void Planet :: move() {
 //Draws the planet, it if is enabled.  Passes in radius scale to super draw method
 void Planet :: draw() {
 	if( enabled == true ) {
-		Sphere :: draw(planetRadiusScale);
+		Sphere :: draw(viewModes[currentViewMode].getPlanetRadiusScale());
 	}
 }
 
