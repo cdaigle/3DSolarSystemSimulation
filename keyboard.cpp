@@ -6,45 +6,25 @@ void keyboard(unsigned char key, int x, int y) {
 	switch(key)
 	{	
 	// slide controls for camera
-		case 'w': 
-			cam.slide(0,0,-0.2); 
-			break;    // slide camera forward
-		case 's': 
-			cam.slide(0,0, 0.2);
-			break;    // slide camera back	
-		case 'a': 
-			cam.slide(-0.2, 0, 0);
+		case 'w':
+			//cam.slide(0,0,-0.2);
+			break;
+		case 's':
+			//cam.slide(0,0, 0.2);
+			break;
+		case 'a':
+			cam.swing(0.5);
 			break;  // slide camera left
-		case 'd': 
-			cam.slide(0.2, 0, 0);
+		case 'd':
+			cam.swing(-0.5);
 			break;   // slide camera right
 		case '+':
-			cam.slide(0, 0.2, 0);
-			break;   // slide camera up
-		case '-': 
-			cam.slide(0, -0.2, 0);
-			break;  // slide camera down
-	
-	// angular motion of the camera
-		case 'Q': 
-			cam.roll(-1);
-			break;  // roll camera left
-		case 'E':
-			cam.roll(1);
-			break;  // roll camera right
-		case 'A':
-			cam.yaw(1);
-			break;  // yaw camera left
-		case 'D':
-			cam.yaw(-1);
-			break;  // yaw camera right
-		case 'S':
-			cam.pitch(-1);
-			break;  // pitch camera down
-		case 'W':
-			cam.pitch(1);
-			break;  // pitch camera up
-
+			cam.zoom(-0.5);
+			break;
+		case '-':
+			cam.zoom(0.5);
+			break;
+		
 		//Turn simulation on/off
 		case '[': 
 			simulationRunning = !simulationRunning;
@@ -86,7 +66,7 @@ void keyboard(unsigned char key, int x, int y) {
 		case '.':
 			viewModes[currentViewMode].incrementOrbitScale();
 			break;
-
+		
 		case 'p':
 			printf("hourIncrement: %f\n", viewModes[currentViewMode].getHourIncrement());
 			printf("planetRadiusScale: %f\n", viewModes[currentViewMode].getPlanetRadiusScale());

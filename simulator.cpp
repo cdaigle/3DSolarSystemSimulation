@@ -11,7 +11,6 @@ void incrementTime() {
 		daysPassed += 1;
 		hoursPassedToday -= 23.0;
 	}
-	
 }
 
 //Actual function called for simulation
@@ -27,7 +26,11 @@ void simulate() {
 		for( int i = 0; i < NUM_PLANETS; i++) {
 			planets[i].move();
 		}
+		for( int i = 0; i < NUM_MOONS; i++ ) {
+			//moons[i].move();
+		}
 		incrementTime();
 	}
+	
 	display(); //Call the display function
 }

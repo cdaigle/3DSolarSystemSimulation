@@ -5,8 +5,7 @@
 #include "planet.h"
 
 double Planet :: getOrbitX(double theta) {
-	double x = cos(theta);
-	return x*getSemiMajorAxis();
+	return cos(theta)*getSemiMajorAxis();
 }
 
 double Planet :: getOrbitY() {
@@ -14,8 +13,7 @@ double Planet :: getOrbitY() {
 }
 
 double Planet :: getOrbitZ(double theta) {
-	double y = sin(theta);
-	return y*getSemiMinorAxis();
+	return sin(theta)*getSemiMinorAxis();
 }
 
 double Planet :: getSemiMajorAxis() {
@@ -23,14 +21,12 @@ double Planet :: getSemiMajorAxis() {
 }
 
 double Planet :: getSemiMinorAxis() {
-	double secondPart = sqrt(1 - pow(eccentricity, 2));
-	return getSemiMajorAxis()*secondPart;
+	return getSemiMajorAxis()*sqrt(1 - pow(eccentricity, 2));
 }
 
 //Calculates the new position of the planet, based on the circularTime
 void Planet :: move() {
-	double orbitPosition = ((hoursPassed / 24) / daysToOrbit);
-	double theta = orbitPosition*DEG2RAD;
+	double theta = ((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
 	setCurrentPosition(getOrbitX(theta),getOrbitY(),getOrbitZ(theta));
 }
 
@@ -46,10 +42,10 @@ void Planet :: drawOrbit() {
 	if( enabled == true && orbitEnabled == true ) {
 		glPushMatrix();
 			glBegin(GL_LINE_STRIP);
-				for( double i = -PI; i <= PI; i+= PI/200 ) {
-					glVertex3f(cos(i)*getSemiMajorAxis(),0.0,sin(i)*getSemiMinorAxis());
+				for( double i = -PI; i <= PI; i+= PI/300 ) {
+					glVertex3f(getOrbitX(i), getOrbitY(), getOrbitZ(i));
 				}
-				glVertex3f(cos(-PI)*getSemiMajorAxis(),0.0,sin(-PI)*getSemiMinorAxis()); //make sure the circle is complete
+				glVertex3f(getOrbitX(-PI), getOrbitY(), getOrbitZ(-PI)); //make sure the ellipse is complete
 			glEnd();
 		glPopMatrix();
 	}

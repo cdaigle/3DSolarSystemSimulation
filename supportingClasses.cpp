@@ -67,22 +67,3 @@ public:
 	float dot(Vector3 b) // return this dotted with b
            {return x * b.x + y * b.y + z * b.z;}
 };
-
-class Timer {
-    clock_t counter;
-public:
-    Timer(): counter(0) {};
-
-    bool elasped(clock_t ms)
-    {
-        clock_t tick = std::clock();
-
-        if(tick - counter >= ms)
-        {
-             counter = tick;
-             return true;
-        }
-
-        return false;
-    }
-};

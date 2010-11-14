@@ -4,3 +4,11 @@
  */
 
 #include "moon.h"
+
+void Moon :: draw() {
+	//Draw orbit
+}
+
+void Moon :: move() {
+	//Move in circle
+}

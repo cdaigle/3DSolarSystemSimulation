@@ -1,8 +1,6 @@
-// The Camera class; see Hill, p.367, Fig. 7.11.
-
 #include "camera.h"
 
-Camera::Camera()
+Camera::Camera(double cameraDistance)
 {
 	viewAngle = 0.0;
 	aspect = 1.0;
@@ -12,6 +10,8 @@ Camera::Camera()
 	u.set(0.0, 0.0, 1.0);
 	v.set(0.0, 1.0, 0.0);
 	n.set(-1.0, 0.0, 0.0);
+	orbitDegree = 0.0;
+	distance = cameraDistance;
 }
 
 void Camera :: setModelViewMatrix(void) {
@@ -25,13 +25,22 @@ void Camera :: setModelViewMatrix(void) {
 	glLoadMatrixf(m); // load OpenGL's modelview matrix
 }
 
-void Camera:: set(Point3 Eye, Point3 look, Vector3 up) {      // create a modelview matrix and send it to OpenGL
+void Camera:: set(Point3 Eye, Point3 look, Vector3 up) {   // create a modelview matrix and send it to OpenGL
 	eye.set(Eye);                                          // store the given eye position
 	n.set(eye.x - look.x, eye.y - look.y, eye.z - look.z); // make n
 	u.set(up.cross(n));                                    // make u = up X n
 	n.normalize(); u.normalize();                          // make them unit length
 	v.set(n.cross(u));                                     // make v =  n X u
 	setModelViewMatrix();                                  // tell OpenGL 
+}
+
+void Camera :: setLookAt(Point3 lookAtIn) {
+	lookAt = lookAtIn;
+}
+
+void Camera :: setView(double degree, double distanceIn) {
+	orbitDegree = degree;
+	distance = distanceIn;
 }
 
 void Camera:: setShape(GLdouble vAng, GLdouble asp, GLdouble nearD, GLdouble farD) { // define shape of view volume
@@ -77,3 +86,26 @@ void Camera:: pitch(GLdouble angle) { //pitch the camera through angle degrees
 	n.set(-sn*t.x + cs*n.x, -sn*t.y + cs*n.y, -sn*t.z + cs*n.z);
 	setModelViewMatrix();	
 }
+
+void Camera :: swing(double value) {
+	orbitDegree += value;
+	if( orbitDegree > 360.0 ) {
+		orbitDegree = 0.0;
+	}
+	if( orbitDegree < 0.0 ) {
+		orbitDegree = 360.0;
+	}
+	Point3 Eye(cos(orbitDegree*DEG2RAD)*distance, eye.y, sin(orbitDegree*DEG2RAD)*distance);
+	Point3 Look = lookAt;
+	Vector3 Up(0.0, 1.0, 0.0);
+	set(Eye, Look, Up);
+}
+
+void Camera :: zoom(double value) {
+	distance += value;
+	if( distance < 0.0 ) {
+		distance = 0.0;
+	}
+	slide(0.0, 0.0, value);
+}
+

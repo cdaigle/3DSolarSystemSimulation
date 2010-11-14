@@ -2,25 +2,28 @@
  * Init : contains init code for planet simulation
  */
 
+#define NUM_STARS 1
 #define NUM_PLANETS 9
+#define NUM_MOONS 0
+
 #define NUM_VIEWMODES 2
 
 ViewMode viewModes[NUM_VIEWMODES] = {
-	ViewMode("SolarSystemView", 0.000065, 0.000001, 0.000009, 0.0, 0.00000013, 0.00000001, 1000.0, 50.0),
-	ViewMode("EarthView", 0.000065, 0.000001, 0.000009, 0.0, 0.00000013, 0.00000001, 1000.0, 50.0)
+	ViewMode("SolarSystemView", 0.000065, 0.000001, 0.000009, 0.0, 0.00000013, 0.00000001, 1000.0, 50.0, 50, -1),
+	ViewMode("EarthView", 0.000065, 0.000001, 0.000009, 0.0, 0.00000013, 0.00000001, 1000.0, 50.0, 50, 2)
 };
 
-Camera cam;
+Camera cam(viewModes[currentViewMode].getInitialCameraDistance());
 
 #include "sphere.cpp"
 #include "star.cpp"
 #include "planet.cpp"
 #include "moon.cpp"
 
-//Radius, orbit, albeldo, texturePath, 
-Star Sun("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp");                                         //Sun
+Star stars[NUM_STARS] = {
+	Star("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp")                                          //Sun
+};
 
-//name, radius, distanceFromSun, albeldo, daysToOrbit, inclination, eccentricity, texture map
 Planet planets[NUM_PLANETS] = {
 	Planet("Mercury", 2400.0, 57910000.0, 0.11, 87.97, 7.0, 0.21, "mercurymap.bmp"),       //Mercury
 	Planet("Venus", 6052.0, 108200000.0, 0.65, 224.70, 3.39, 0.01, "venusmap.bmp"),        //Venus
@@ -33,7 +36,11 @@ Planet planets[NUM_PLANETS] = {
 	Planet("Pluto", 1150.0, 5913520000.0, 0.55, 90550.0, 17.15, 0.25, "plutomap.bmp" )     //Pluto
 };
 
-RGBpixmap pixmaps[NUM_PLANETS + 1];  //for textures
+Moon moons[NUM_MOONS] = { };
+
+RGBpixmap starPixmaps[NUM_STARS];
+RGBpixmap planetPixmaps[NUM_PLANETS];  //for textures
+RGBpixmap moonPixmaps[NUM_MOONS];
 
 void setupLighting(void) {
 	GLfloat light0_position[] = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -53,21 +60,32 @@ void setupLighting(void) {
 	glEnable(GL_LIGHT0);
 }
 
-void init(void) {
-	setupLighting();
-	
+void setupTextures(void) {
 	// Initialize textures
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	
-	Sun.textureId = 3000;
-	int value = pixmaps[NUM_PLANETS].readBMPFile(Sun.getTexturePath());
-	pixmaps[NUM_PLANETS].setTexture(Sun.textureId);
+	for( int i = 0; i < NUM_STARS; i++ ) {
+		stars[i].textureId = 3000;
+		int value = starPixmaps[i].readBMPFile(stars[i].getTexturePath());
+		starPixmaps[i].setTexture(stars[i].textureId);
+	}
 
 	for( int i = 0; i < NUM_PLANETS; i++ ) {
-		planets[i].textureId = 3001 + i;									//Assign texture id
-		int value = pixmaps[i].readBMPFile(planets[i].getTexturePath());    //make pixmap from image
-		pixmaps[i].setTexture(planets[i].textureId);        				//create texture
+		planets[i].textureId = 3001 + i;
+		int value = planetPixmaps[i].readBMPFile(planets[i].getTexturePath());
+		planetPixmaps[i].setTexture(planets[i].textureId);
 	}
+	
+	for( int i = 0; i < NUM_MOONS; i++ ) {
+		moons[i].textureId = 3001 + i;
+		int value = moonPixmaps[i].readBMPFile(moons[i].getTexturePath());
+		moonPixmaps[i].setTexture(moons[i].textureId);
+	}
+}
+
+void init(void) {
+	setupLighting();
+	setupTextures();
 }

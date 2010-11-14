@@ -7,17 +7,17 @@
 
 int main(int argc, char * argv[]) {
 	// initialize GLUT
-        glutInit( &argc, argv );		
-		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-		glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
-		glutInitWindowPosition(100, 100);
-		glutCreateWindow("3D Planet Simulation");
+	glutInit( &argc, argv );		
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+	glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
+	glutInitWindowPosition(100, 100);
+	glutCreateWindow("3D Planet Simulation");
 
-        // setup window callbacks
+	glutMotionFunc(mouse);
 	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(display);
 	
-	glEnable(GL_LIGHTING);  // enable the light source
+	glEnable(GL_LIGHTING);   // enable the light source
 	glEnable(GL_LIGHT0);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_DEPTH_TEST); // for removal of hidden surfaces
@@ -30,10 +30,10 @@ int main(int argc, char * argv[]) {
 
 	//Set up the viewport and initial camera
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	Point3 eye(50.0, 10.0, 0.0); 
-	Point3 look(0.0, 0.0, 0.0); 
+	Point3 eye(50.0, 10.0, 0.0);
+	Point3 look(0.0, 0.0, 0.0);
 	Vector3 up(0.0, 1.0, 0.0);
-	cam.set(eye, look, up); // make the initial camera
+	cam.set(eye, look, up);
 	cam.setShape(30.0f, WINDOW_WIDTH/WINDOW_HEIGHT, 0.5f, 1000.0f);
 
 	//enter main loop
