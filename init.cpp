@@ -36,7 +36,7 @@ Planet planets[NUM_PLANETS] = {
 	Planet("Pluto", 1150.0, 5913520000.0, 0.55, 90550.0, 17.15, 0.25, "plutomap.bmp" )     //Pluto
 };
 
-Moon moons[NUM_MOONS] = { };
+//Moon moons[NUM_MOONS] = { };
 
 RGBpixmap starPixmaps[NUM_STARS];
 RGBpixmap planetPixmaps[NUM_PLANETS];  //for textures
@@ -78,11 +78,11 @@ void setupTextures(void) {
 		planetPixmaps[i].setTexture(planets[i].textureId);
 	}
 	
-	for( int i = 0; i < NUM_MOONS; i++ ) {
-		moons[i].textureId = 3001 + i;
-		int value = moonPixmaps[i].readBMPFile(moons[i].getTexturePath());
-		moonPixmaps[i].setTexture(moons[i].textureId);
-	}
+//	for( int i = 0; i < NUM_MOONS; i++ ) {
+//		moons[i].textureId = 3001 + i;
+//		int value = moonPixmaps[i].readBMPFile(moons[i].getTexturePath());
+//		moonPixmaps[i].setTexture(moons[i].textureId);
+//	}
 }
 
 void init(void) {

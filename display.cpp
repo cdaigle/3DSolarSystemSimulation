@@ -47,9 +47,9 @@ void display(void) {
 		}
 		
 		//Draw the mooons
-		for( int i = 0; i < NUM_MOONS; i++ ) {
-			moons[i].draw();
-		}
+//		for( int i = 0; i < NUM_MOONS; i++ ) {
+//			moons[i].draw();
+//		}
 
 		cam.setLookAt(getLookAt(viewModes[currentViewMode].getId()));
 
