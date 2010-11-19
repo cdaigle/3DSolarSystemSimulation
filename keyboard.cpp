@@ -26,7 +26,7 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		
 		//Turn simulation on/off
-		case '[': 
+		case 32:   //Space key 
 			simulationRunning = !simulationRunning;
 			break;
 		
@@ -48,29 +48,51 @@ void keyboard(unsigned char key, int x, int y) {
 			}
 			break;
 		
-		case '<': 
+		case '_': 
 			viewModes[currentViewMode].decrementHourIncrement();
 			break;
-		case '>':
+		case '=':
 			viewModes[currentViewMode].incrementHourIncrement();
 			break;
-		case ';':
+		case '[':
 			viewModes[currentViewMode].decrementPlanetRadiusScale();
 			break;
-		case '\'':
+		case ']':
 			viewModes[currentViewMode].incrementPlanetRadiusScale();
 			break;
-		case ',':
-			viewModes[currentViewMode].decrementOrbitScale();
+		case ';':
+			viewModes[currentViewMode].decrementStarRadiusScale();
+			break;
+		case '\'':
+			viewModes[currentViewMode].incrementStarRadiusScale();
 			break;
 		case '.':
+			viewModes[currentViewMode].decrementOrbitScale();
+			break;
+		case '/':
 			viewModes[currentViewMode].incrementOrbitScale();
 			break;
 		
 		case 'p':
-			printf("hourIncrement: %f\n", viewModes[currentViewMode].getHourIncrement());
-			printf("planetRadiusScale: %f\n", viewModes[currentViewMode].getPlanetRadiusScale());
-			printf("orbitScale: %f\n", viewModes[currentViewMode].getOrbitScale());
+			printf("hourIncrement: %e\n", viewModes[currentViewMode].getHourIncrement());
+			printf("planetRadiusScale: %e\n", viewModes[currentViewMode].getPlanetRadiusScale());
+			printf("starRadiusScale: %e\n", viewModes[currentViewMode].getStarRadiusScale());
+			printf("orbitScale: %e\n", viewModes[currentViewMode].getOrbitScale());
+			printf("cameraDistance: %f\n", cam.getCameraDistance());
+			printf("eyePosition: %f, %f, %f\n", cam.getEyePosition().x, cam.getEyePosition().y, cam.getEyePosition().z );
+			break;
+		
+		case 27: //Esc key - exit
+			exit(0);
+			break;
+	
+		case GLUT_KEY_F1:
+			currentViewMode = 0;
+			cam.setView(viewModes[currentViewMode].getInitialCameraDistance());
+			break;
+		case GLUT_KEY_F2:
+			currentViewMode = 1;
+			cam.setView(viewModes[currentViewMode].getInitialCameraDistance());
 			break;
 	}
 	glutPostRedisplay(); //draw it again

@@ -10,7 +10,7 @@ Camera::Camera(double cameraDistance)
 	u.set(0.0, 0.0, 1.0);
 	v.set(0.0, 1.0, 0.0);
 	n.set(-1.0, 0.0, 0.0);
-	orbitDegree = 0.0;
+	orbitDegree = 180.0;
 	distance = cameraDistance;
 }
 
@@ -38,9 +38,9 @@ void Camera :: setLookAt(Point3 lookAtIn) {
 	lookAt = lookAtIn;
 }
 
-void Camera :: setView(double degree, double distanceIn) {
-	orbitDegree = degree;
-	distance = distanceIn;
+void Camera :: setView(double initCameraDistance) {
+	orbitDegree = 0.0;
+	distance = initCameraDistance;
 }
 
 void Camera:: setShape(GLdouble vAng, GLdouble asp, GLdouble nearD, GLdouble farD) { // define shape of view volume
@@ -109,3 +109,10 @@ void Camera :: zoom(double value) {
 	slide(0.0, 0.0, value);
 }
 
+Point3 Camera :: getEyePosition() {
+	return eye;
+}
+
+double Camera :: getCameraDistance() {
+	return distance;
+}

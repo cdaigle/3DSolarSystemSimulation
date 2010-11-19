@@ -100,6 +100,18 @@ class ViewMode{
 		double getInitialCameraDistance(void) {
 			return cameraDistance;
 		}
+		Point3 getInitialEyePosition(void) {
+			float x = -10.0f;
+			float y = 1.2f;
+			float z = 0.0f;
+			return Point3(x,y,z);
+		}
+		Point3 getInitialLookPosition(void) {
+			float x = 0.0f;
+			float y = 0.0f;
+			float z = 0.0f;
+			return Point3(x,y,z);
+		}
 		int getId(void) {
 			return orbitBodyId;
 		}

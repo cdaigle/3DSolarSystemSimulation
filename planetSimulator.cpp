@@ -15,6 +15,8 @@ using namespace std;
 
 #define PI 3.14
 #define DEG2RAD PI/180
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 500
 
 //Global values
 double static hoursPassedToday = -1.0;

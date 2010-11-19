@@ -17,5 +17,7 @@ class Camera {
 		void swing(double);
 		void zoom(double);
 		void setLookAt(Point3);
-		void setView(double, double);
+		void setView(double);
+		Point3 getEyePosition(void);
+		double getCameraDistance(void);
 };

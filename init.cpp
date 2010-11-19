@@ -9,8 +9,8 @@
 #define NUM_VIEWMODES 2
 
 ViewMode viewModes[NUM_VIEWMODES] = {
-	ViewMode("SolarSystemView", 0.000065, 0.000001, 0.000009, 0.0, 0.00000013, 0.00000001, 1000.0, 50.0, 50, -1),
-	ViewMode("EarthView", 0.000065, 0.000001, 0.000009, 0.0, 0.00000013, 0.00000001, 1000.0, 50.0, 50, 2)
+	ViewMode("SolarSystemView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 1000.0, 50.0, 9.93, -1),
+	ViewMode("EarthView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 1000.0, 50.0, 9.93, 2)
 };
 
 Camera cam(viewModes[currentViewMode].getInitialCameraDistance());
@@ -67,7 +67,7 @@ void setupTextures(void) {
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	
 	for( int i = 0; i < NUM_STARS; i++ ) {
-		stars[i].textureId = 3000;
+		stars[i].textureId = 3000 - i;
 		int value = starPixmaps[i].readBMPFile(stars[i].getTexturePath());
 		starPixmaps[i].setTexture(stars[i].textureId);
 	}
@@ -78,14 +78,25 @@ void setupTextures(void) {
 		planetPixmaps[i].setTexture(planets[i].textureId);
 	}
 	
-//	for( int i = 0; i < NUM_MOONS; i++ ) {
-//		moons[i].textureId = 3001 + i;
+	for( int i = 0; i < NUM_MOONS; i++ ) {
+//		moons[i].textureId = 3001 + NUM_PLANETS + i;
 //		int value = moonPixmaps[i].readBMPFile(moons[i].getTexturePath());
 //		moonPixmaps[i].setTexture(moons[i].textureId);
-//	}
+	}
+}
+
+void setupCamera(void) {
+	//Set up the viewport and initial camera
+	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+	Point3 eye = viewModes[currentViewMode].getInitialEyePosition();
+	Point3 look = viewModes[currentViewMode].getInitialLookPosition();
+	Vector3 up(0.0, 1.0, 0.0);
+	cam.set(eye, look, up);
+	cam.setShape(30.0f, WINDOW_WIDTH/WINDOW_HEIGHT, 0.5f, 250.0f);
 }
 
 void init(void) {
 	setupLighting();
 	setupTextures();
+	setupCamera();
 }

@@ -2,9 +2,6 @@
  * main.cpp - main function
  */
 
-#define WINDOW_WIDTH 1000
-#define WINDOW_HEIGHT 500
-
 int main(int argc, char * argv[]) {
 	// initialize GLUT
 	glutInit( &argc, argv );		
@@ -25,16 +22,8 @@ int main(int argc, char * argv[]) {
 	
 	glutIdleFunc(simulate);
 	
-	//Initialize the lighting, the planets and the textures
-	init();				
-
-	//Set up the viewport and initial camera
-	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	Point3 eye(50.0, 10.0, 0.0);
-	Point3 look(0.0, 0.0, 0.0);
-	Vector3 up(0.0, 1.0, 0.0);
-	cam.set(eye, look, up);
-	cam.setShape(30.0f, WINDOW_WIDTH/WINDOW_HEIGHT, 0.5f, 1000.0f);
+	//Initialize the camera, lighting, the planets and the textures
+	init();
 
 	//enter main loop
 	glutMainLoop();
