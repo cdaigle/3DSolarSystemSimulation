@@ -17,6 +17,7 @@ void incrementTime() {
 void simulate() {
 	//Ensure we do not have to move the camera manually
 	if(hoursPassedToday == -1){
+		incrementTime();
 		cam.slide(0,0,-0.001);
 		glutPostRedisplay();
 	}
@@ -26,8 +27,8 @@ void simulate() {
 		for( int i = 0; i < NUM_PLANETS; i++) {
 			planets[i].move();
 		}
-		for( int i = 0; i < NUM_MOONS; i++ ) {
-			//moons[i].move();
+		for( int i = 0; i < NUM_SATELLITES; i++ ) {
+			//satellites[i].move();
 		}
 		incrementTime();
 	}

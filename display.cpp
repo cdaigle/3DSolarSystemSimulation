@@ -10,7 +10,7 @@ Point3 getLookAt(int id) {
 		return planets[id].getCurrentPosition();
 	} else {
 		id = id - NUM_PLANETS;
-		//return moons[id].getCurrentPosition();
+		//return satellites[id].getCurrentPosition();
 	}
 }
 void display(void) {
@@ -46,10 +46,10 @@ void display(void) {
 			planets[i].drawOrbit();
 		}
 		
-		//Draw the mooons
-//		for( int i = 0; i < NUM_MOONS; i++ ) {
-//			moons[i].draw();
-//		}
+		//Draw the satellites
+		for( int i = 0; i < NUM_SATELLITES; i++ ) {
+//			satellites[i].draw();
+		}
 
 		cam.setLookAt(getLookAt(viewModes[currentViewMode].getId()));
 

@@ -10,6 +10,7 @@ int main(int argc, char * argv[]) {
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("3D Planet Simulation");
 
+	glutMouseWheelFunc(mouseWheel);
 	glutMotionFunc(mouse);
 	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(display);

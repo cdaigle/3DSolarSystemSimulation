@@ -14,3 +14,7 @@ void mouse(int x, int y) {
 	prevX = x;
 	prevY = y;
 }
+
+void mouseWheel(int wheel, int direction, int x, int y) {
+	cam.zoom(-direction/2.0);
+}

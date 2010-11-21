@@ -2,9 +2,9 @@
  * Init : contains init code for planet simulation
  */
 
-#define NUM_STARS 1
+#define NUM_STARS 2
 #define NUM_PLANETS 9
-#define NUM_MOONS 0
+#define NUM_SATELLITES 1
 
 #define NUM_VIEWMODES 2
 
@@ -18,9 +18,10 @@ Camera cam(viewModes[currentViewMode].getInitialCameraDistance());
 #include "sphere.cpp"
 #include "star.cpp"
 #include "planet.cpp"
-#include "moon.cpp"
+#include "satellite.cpp"
 
 Star stars[NUM_STARS] = {
+	Star("Stars", 125/viewModes[currentViewMode].getStarRadiusScale(), 0.0, 1.0, "stars.bmp"),
 	Star("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp")                                          //Sun
 };
 
@@ -36,11 +37,13 @@ Planet planets[NUM_PLANETS] = {
 	Planet("Pluto", 1150.0, 5913520000.0, 0.55, 90550.0, 17.15, 0.25, "plutomap.bmp" )     //Pluto
 };
 
-//Moon moons[NUM_MOONS] = { };
+Satellite satellites[NUM_SATELLITES] = {
+	Satellite("Moon", 100.0, 0.0, 1.0, "moonmap.bmp")                                      //Earth's Moon
+};
 
 RGBpixmap starPixmaps[NUM_STARS];
 RGBpixmap planetPixmaps[NUM_PLANETS];  //for textures
-RGBpixmap moonPixmaps[NUM_MOONS];
+RGBpixmap moonPixmaps[NUM_SATELLITES];
 
 void setupLighting(void) {
 	GLfloat light0_position[] = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -78,7 +81,7 @@ void setupTextures(void) {
 		planetPixmaps[i].setTexture(planets[i].textureId);
 	}
 	
-	for( int i = 0; i < NUM_MOONS; i++ ) {
+	for( int i = 0; i < NUM_SATELLITES; i++ ) {
 //		moons[i].textureId = 3001 + NUM_PLANETS + i;
 //		int value = moonPixmaps[i].readBMPFile(moons[i].getTexturePath());
 //		moonPixmaps[i].setTexture(moons[i].textureId);
