@@ -6,12 +6,6 @@ void keyboard(unsigned char key, int x, int y) {
 	switch(key)
 	{	
 	// slide controls for camera
-		case 'w':
-			//cam.slide(0,0,-0.2);
-			break;
-		case 's':
-			//cam.slide(0,0, 0.2);
-			break;
 		case 'a':
 			cam.swing(0.5);
 			break;  // slide camera left
@@ -42,12 +36,45 @@ void keyboard(unsigned char key, int x, int y) {
 		case '9': 
 			planets[key-49].toggle();
 			break;
-		case 'o': 
+		case '0': 
 			for( int i = 0; i < NUM_PLANETS; i++ ) {
 				planets[i].toggleOrbit();
 			}
 			break;
 		
+		case '!':
+			satellites[0].toggle();
+			break;
+		case '@':
+			satellites[1].toggle();
+			break;
+		case '#':
+			satellites[2].toggle();
+			break;
+		case '$':
+			satellites[3].toggle();
+			break;
+		case '%':
+			satellites[4].toggle();
+			break;
+		case '^':
+			satellites[5].toggle();
+			break;
+		case '&':
+			satellites[6].toggle();
+			break;
+		case '*':
+			satellites[7].toggle();
+			break;
+		case '(':
+			satellites[8].toggle();
+			break;
+		case ')':
+			for( int i = 0; i < NUM_SATELLITES; i++ ) {
+				satellites[i].toggleOrbit();
+			}
+			break;
+
 		case '_': 
 			viewModes[currentViewMode].decrementHourIncrement();
 			break;
@@ -72,12 +99,26 @@ void keyboard(unsigned char key, int x, int y) {
 		case '/':
 			viewModes[currentViewMode].incrementOrbitScale();
 			break;
+		case 'i':
+			viewModes[currentViewMode].incrementSatelliteRadiusScale();
+			break;
+		case 'I':
+			viewModes[currentViewMode].decrementSatelliteRadiusScale();
+			break;
+		case 'o':
+			viewModes[currentViewMode].incrementSatelliteOrbitScale();
+			break;
+		case 'O':
+			viewModes[currentViewMode].decrementSatelliteOrbitScale();
+			break;
 		
 		case 'p':
 			printf("hourIncrement: %e\n", viewModes[currentViewMode].getHourIncrement());
 			printf("planetRadiusScale: %e\n", viewModes[currentViewMode].getPlanetRadiusScale());
 			printf("starRadiusScale: %e\n", viewModes[currentViewMode].getStarRadiusScale());
+			printf("satelliteRadiusScale: %e\n", viewModes[currentViewMode].getSatelliteRadiusScale());
 			printf("orbitScale: %e\n", viewModes[currentViewMode].getOrbitScale());
+			printf("satelliteOrbitScale: %e\n", viewModes[currentViewMode].getSatelliteOrbitScale());
 			printf("cameraDistance: %f\n", cam.getCameraDistance());
 			printf("eyePosition: %f, %f, %f\n", cam.getEyePosition().x, cam.getEyePosition().y, cam.getEyePosition().z );
 			break;

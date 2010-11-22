@@ -6,8 +6,12 @@ class ViewMode{
 		double planetRadiusScaleModifier;
 		double starRadiusScale;
 		double starRadiusScaleModifier;
+		double satelliteRadiusScale;
+		double satelliteRadiusScaleModifier;
 		double orbitScale;
 		double orbitScaleModifier;
+		double satelliteOrbitScale;
+		double satelliteOrbitScaleModifier;
 		
 		double hourIncrement;
 		double hourIncrementModifier;
@@ -16,15 +20,19 @@ class ViewMode{
 
 		int orbitBodyId;
 	public:
-		ViewMode(string nameIn, double pRS, double pRSM, double sRS, double sRSM, double oS, double oSM, double hI, double hIM, double cD, int oBI) {
+		ViewMode(string nameIn, double pRS, double pRSM, double sRS, double sRSM, double oS, double oSM, double hI, double hIM, double cD, int oBI, double satelliteRadiusScaleIn, double satelliteRadiusScaleModifierIn, double satelliteOrbitScaleIn, double satelliteOrbitScaleModifierIn) {
 			name = nameIn;
 			
 			planetRadiusScale = pRS;
 			planetRadiusScaleModifier = pRSM;
 			starRadiusScale = sRS;
 			starRadiusScaleModifier = sRSM;
+			satelliteRadiusScale = satelliteRadiusScaleIn;
+			satelliteRadiusScaleModifier = satelliteRadiusScaleModifierIn;
 			orbitScale = oS;
 			orbitScaleModifier = oSM;
+			satelliteOrbitScale = satelliteOrbitScaleIn;
+			satelliteOrbitScaleModifier = satelliteOrbitScaleModifierIn;
 			
 			hourIncrement = hI;
 			hourIncrementModifier = hIM;
@@ -64,6 +72,22 @@ class ViewMode{
 		double getStarRadiusScaleModifier(void) {
 			return starRadiusScaleModifier;
 		}
+		
+		void incrementSatelliteRadiusScale(void) { 
+			satelliteRadiusScale += satelliteRadiusScaleModifier;
+		}
+		void decrementSatelliteRadiusScale(void) {
+			satelliteRadiusScale -= satelliteRadiusScaleModifier; 
+			if( satelliteRadiusScale <= 0.0 ) {
+				satelliteRadiusScale = 0.0;
+			}
+		}
+		double getSatelliteRadiusScale(void) {
+			return satelliteRadiusScale;
+		}
+		double getSatelliteRadiusScaleModifier(void) {
+			return satelliteRadiusScaleModifier;
+		}
 
 		void incrementOrbitScale(void) {
 			orbitScale += orbitScaleModifier;
@@ -79,6 +103,22 @@ class ViewMode{
 		}
 		double getOrbitScaleModifier(void) {
 			return orbitScaleModifier;
+		}
+		
+		void incrementSatelliteOrbitScale(void) {
+			satelliteOrbitScale += satelliteOrbitScaleModifier;
+		}
+		void decrementSatelliteOrbitScale(void) {
+			satelliteOrbitScale -= satelliteOrbitScaleModifier;
+			if( satelliteOrbitScale <= 0.0 ) {
+				satelliteOrbitScale = 0.0;
+			}
+		}
+		double getSatelliteOrbitScale(void) {
+			return satelliteOrbitScale;
+		}
+		double getSatelliteOrbitScaleModifier(void) {
+			return satelliteOrbitScaleModifier;
 		}
 
 		void incrementHourIncrement(void) {

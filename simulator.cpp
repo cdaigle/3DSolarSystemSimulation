@@ -28,7 +28,7 @@ void simulate() {
 			planets[i].move();
 		}
 		for( int i = 0; i < NUM_SATELLITES; i++ ) {
-			//satellites[i].move();
+			satellites[i].move(planets[satellites[i].getPlanetId()]);
 		}
 		incrementTime();
 	}

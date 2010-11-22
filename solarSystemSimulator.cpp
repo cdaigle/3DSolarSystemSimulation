@@ -5,6 +5,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+//Allows mouse-wheel interaction via glutMouseWheelFunc
 #include <GL/freeglut_ext.h>
 #include <iostream>
 #include <math.h>
