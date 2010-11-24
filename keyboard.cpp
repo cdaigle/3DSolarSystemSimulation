@@ -43,31 +43,31 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 		
 		case '!':
-			satellites[0].toggle();
+			//satellites[0].toggle();
 			break;
 		case '@':
-			satellites[1].toggle();
+			//satellites[1].toggle();
 			break;
 		case '#':
-			satellites[2].toggle();
+			satellites[0].toggle();
 			break;
 		case '$':
-			satellites[3].toggle();
+			satellites[1].toggle();
 			break;
 		case '%':
-			satellites[4].toggle();
+			satellites[2].toggle();
 			break;
 		case '^':
-			satellites[5].toggle();
+			satellites[3].toggle();
 			break;
 		case '&':
-			satellites[6].toggle();
+			satellites[4].toggle();
 			break;
 		case '*':
-			satellites[7].toggle();
+			satellites[5].toggle();
 			break;
 		case '(':
-			satellites[8].toggle();
+			satellites[6].toggle();
 			break;
 		case ')':
 			for( int i = 0; i < NUM_SATELLITES; i++ ) {
@@ -129,10 +129,12 @@ void keyboard(unsigned char key, int x, int y) {
 	
 		case 'z':
 			currentViewMode = 0;
+			printf("Changing view: SolarSystemView\n");
 			cam.setView(viewModes[currentViewMode].initCameraDistance);
 			break;
 		case 'x':
 			currentViewMode = 1;
+			printf("Changing view: EarthView\n");
 			cam.setView(viewModes[currentViewMode].initCameraDistance);
 			break;
 	}

@@ -26,12 +26,14 @@ void Satellite :: draw() {
 void Satellite :: drawOrbit() {
 	if( enabled == true && orbitEnabled == true ) {
 		glPushMatrix();
+			Point3 pt = getCurrentPosition();
+			glTranslated(planetPosition.x, planetPosition.y, planetPosition.z);
 			glBegin(GL_LINE_STRIP);
-				Point3 pt = getCurrentPosition();
+				
 				for( double i = -PI; i <= PI; i+= PI/300 ) {
-					glVertex3f(pt.x+getOrbitX(i), pt.y+getOrbitY(i), pt.z+getOrbitZ(i));
+					glVertex3f(getOrbitX(i), getOrbitY(i), getOrbitZ(i));
 				}
-				glVertex3f(pt.x+getOrbitX(-PI), pt.y+getOrbitY(-PI), pt.z+getOrbitZ(-PI)); //make sure the ellipse is complete
+				glVertex3f(getOrbitX(-PI), getOrbitY(-PI), getOrbitZ(-PI)); //make sure the ellipse is complete
 			glEnd();
 		glPopMatrix();
 	}
@@ -39,8 +41,8 @@ void Satellite :: drawOrbit() {
 
 void Satellite :: move(Planet planet) {
 	double theta = ((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
-	Point3 pt = planet.getCurrentPosition();
-	setCurrentPosition(pt.x+getOrbitX(theta), pt.y+getOrbitY(theta), pt.z+getOrbitZ(theta));
+	planetPosition = planet.getCurrentPosition();
+	setCurrentPosition(planetPosition.x+getOrbitX(theta), planetPosition.y+getOrbitY(theta), planetPosition.z+getOrbitZ(theta));
 }
 
 int Satellite :: getPlanetId() {

@@ -4,9 +4,10 @@
 
 Point3 getLookAt(int id) {
 	if( id < 0 ) {
-		id = id + NUM_STARS;
-		return stars[id].getCurrentPosition();
+		printf("Looking at a star\n");
+		return Point3(0.0, 0.0, 0.0); //All stars have CurrentPosition of 0.0,0.0,0.0
 	} else if( id < NUM_PLANETS ) {
+		printf("Looking at a planet\n");
 		return planets[id].getCurrentPosition();
 	} else {
 		id = id - NUM_PLANETS;

@@ -10,8 +10,9 @@ class Satellite : public Sphere{
 			inclination = inclinationIn;
 			eccentricity = eccentricityIn;
 			planetId = planetIdIn;
-			enabled = true;
-			orbitEnabled = true;
+			enabled = false;
+			orbitEnabled = false;
+			planetPosition.set(0.0f, 0.0f, 0.0f);
 		}
 		void draw(void);
 		void move(Planet);
@@ -29,4 +30,5 @@ class Satellite : public Sphere{
 		double daysToOrbit;
 		double inclination;
 		double eccentricity;
+		Point3 planetPosition;
 };
