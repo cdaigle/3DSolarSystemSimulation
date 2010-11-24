@@ -8,10 +8,10 @@ all: $(BINARIES)
 clean:	
 	-rm *.o $(BINARIES)
 
-planetSimulator : solarSystemSimulator.o 
+solarSystemSimulator : solarSystemSimulator.o 
 	g++ $(LDFLAGS) $^ -o solarSystemSimulator 
 
-planetSimulator.o: solarSystemSimulator.cpp 
+solarSystemSimulator.o: solarSystemSimulator.cpp 
 	g++ -c $(CFLAGS) solarSystemSimulator.cpp
 
 depend:
