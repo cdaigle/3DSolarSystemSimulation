@@ -6,7 +6,7 @@
 #include "satellite.h"
 
 double Satellite :: getOrbitX(double theta) {
-	return cos(theta) * viewModes[currentViewMode].satelliteOrbitScale;// * scaleOrbit();
+	return cos(theta) * views[viewId].satelliteOrbitScale;// * scaleOrbit();
 }
 
 double Satellite :: getOrbitY(double theta) {
@@ -14,12 +14,12 @@ double Satellite :: getOrbitY(double theta) {
 }
 
 double Satellite :: getOrbitZ(double theta) {
-	return sin(theta) * viewModes[currentViewMode].satelliteOrbitScale;// * scaleOrbit();
+	return sin(theta) * views[viewId].satelliteOrbitScale;// * scaleOrbit();
 }
 
 void Satellite :: draw() {
 	if( enabled == true ) {
-		Sphere :: draw(viewModes[currentViewMode].satelliteRadiusScale);
+		Sphere :: draw(views[viewId].satelliteRadiusScale);
 	}
 }
 

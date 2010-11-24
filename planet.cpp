@@ -33,7 +33,7 @@ void Planet :: move() {
 //Draws the planet, it if is enabled.  Passes in radius scale to super draw method
 void Planet :: draw() {
 	if( enabled == true ) {
-		Sphere :: draw(viewModes[currentViewMode].planetRadiusScale);
+		Sphere :: draw(views[viewId].planetRadiusScale);
 	}
 }
 

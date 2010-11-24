@@ -33,5 +33,5 @@ void Sphere :: draw(double radiusScale) {
 
 //Returns the scaled orbit distance
 double Sphere :: scaleOrbit() {
-	return orbitingDistance * viewModes[currentViewMode].planetOrbitScale;
+	return orbitingDistance * views[viewId].planetOrbitScale;
 }

@@ -27,7 +27,7 @@ int static daysPassed = 0;
 
 bool static simulationRunning = false;
 
-int static currentViewMode = 0;
+int static viewId = 0;
 
 #include "supportingClasses.cpp"
 #include "ViewMode.cpp"

@@ -4,5 +4,5 @@
 #include "star.h"
 
 void Star :: draw() {
-	Sphere :: draw(viewModes[currentViewMode].starRadiusScale);
+	Sphere :: draw(views[viewId].starRadiusScale);
 }

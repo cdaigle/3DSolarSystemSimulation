@@ -53,7 +53,7 @@ void display(void) {
 			satellites[i].drawOrbit();
 		}
 
-		cam.setLookAt(getLookAt(viewModes[currentViewMode].getId()));
+		cam.setLookAt(getLookAt(views[viewId].getId()));
 
 	glFlush();
 	glutSwapBuffers();

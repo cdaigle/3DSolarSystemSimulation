@@ -76,49 +76,49 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 
 		case '_': 
-			viewModes[currentViewMode].decHourIncrement();
+			views[viewId].decHourIncrement();
 			break;
 		case '=':
-			viewModes[currentViewMode].incHourIncrement();
+			views[viewId].incHourIncrement();
 			break;
 		case '[':
-			viewModes[currentViewMode].decPlanetRadiusScale();
+			views[viewId].decPlanetRadiusScale();
 			break;
 		case ']':
-			viewModes[currentViewMode].incPlanetRadiusScale();
+			views[viewId].incPlanetRadiusScale();
 			break;
 		case ';':
-			viewModes[currentViewMode].decStarRadiusScale();
+			views[viewId].decStarRadiusScale();
 			break;
 		case '\'':
-			viewModes[currentViewMode].incStarRadiusScale();
+			views[viewId].incStarRadiusScale();
 			break;
 		case '.':
-			viewModes[currentViewMode].decPlanetOrbitScale();
+			views[viewId].decPlanetOrbitScale();
 			break;
 		case '/':
-			viewModes[currentViewMode].incPlanetOrbitScale();
+			views[viewId].incPlanetOrbitScale();
 			break;
 		case 'i':
-			viewModes[currentViewMode].incSatelliteRadiusScale();
+			views[viewId].incSatelliteRadiusScale();
 			break;
 		case 'I':
-			viewModes[currentViewMode].decSatelliteRadiusScale();
+			views[viewId].decSatelliteRadiusScale();
 			break;
 		case 'o':
-			viewModes[currentViewMode].incSatelliteOrbitScale();
+			views[viewId].incSatelliteOrbitScale();
 			break;
 		case 'O':
-			viewModes[currentViewMode].decSatelliteOrbitScale();
+			views[viewId].decSatelliteOrbitScale();
 			break;
 		
 		case 'p':
-			printf("hourIncrement: %e\n", viewModes[currentViewMode].hourIncrement);
-			printf("planetRadiusScale: %e\n", viewModes[currentViewMode].planetRadiusScale);
-			printf("starRadiusScale: %e\n", viewModes[currentViewMode].starRadiusScale);
-			printf("satelliteRadiusScale: %e\n", viewModes[currentViewMode].satelliteRadiusScale);
-			printf("orbitScale: %e\n", viewModes[currentViewMode].planetOrbitScale);
-			printf("satelliteOrbitScale: %e\n", viewModes[currentViewMode].satelliteOrbitScale);
+			printf("hourIncrement: %e\n", views[viewId].hourIncrement);
+			printf("planetRadiusScale: %e\n", views[viewId].planetRadiusScale);
+			printf("starRadiusScale: %e\n", views[viewId].starRadiusScale);
+			printf("satelliteRadiusScale: %e\n", views[viewId].satelliteRadiusScale);
+			printf("orbitScale: %e\n", views[viewId].planetOrbitScale);
+			printf("satelliteOrbitScale: %e\n", views[viewId].satelliteOrbitScale);
 			printf("cameraDistance: %f\n", cam.distance);
 			printf("eyePosition: %f, %f, %f\n", cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z );
 			break;
@@ -128,14 +128,14 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 	
 		case 'z':
-			currentViewMode = 0;
+			viewId = 0;
 			printf("Changing view: SolarSystemView\n");
-			cam.setView(viewModes[currentViewMode].initCameraDistance);
+			cam.setView(views[viewId].initCameraDistance);
 			break;
 		case 'x':
-			currentViewMode = 1;
+			viewId = 1;
 			printf("Changing view: EarthView\n");
-			cam.setView(viewModes[currentViewMode].initCameraDistance);
+			cam.setView(views[viewId].initCameraDistance);
 			break;
 	}
 	glutPostRedisplay();
