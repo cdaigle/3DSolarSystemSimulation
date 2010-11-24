@@ -90,10 +90,10 @@ void Camera:: pitch(GLdouble angle) { //pitch the camera through angle degrees
 void Camera :: swing(double value) {
 	orbitDegree += value;
 	if( orbitDegree > 360.0 ) {
-		orbitDegree = 0.0;
+		orbitDegree -= 360.0;
 	}
 	if( orbitDegree < 0.0 ) {
-		orbitDegree = 360.0;
+		orbitDegree += 360.0;
 	}
 	Point3 Eye(cos(orbitDegree*DEG2RAD)*distance, eye.y, sin(orbitDegree*DEG2RAD)*distance);
 	Point3 Look = lookAt;
@@ -109,10 +109,6 @@ void Camera :: zoom(double value) {
 	slide(0.0, 0.0, value);
 }
 
-Point3 Camera :: getEyePosition() {
+Point3 Camera :: getEyePos() {
 	return eye;
-}
-
-double Camera :: getCameraDistance() {
-	return distance;
 }

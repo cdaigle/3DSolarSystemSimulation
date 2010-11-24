@@ -3,11 +3,11 @@ class Camera {
 		Point3 eye, lookAt;
 		Vector3 u,v,n;
 		GLdouble viewAngle, aspect, nearDist, farDist; // view volume shape
-		double orbitDegree, distance;
 		void setModelViewMatrix(); // tell OpenGL where the camera is
 
 	public:
 		Camera(double);                                             // default constructor
+		double orbitDegree, distance;
 		void set(Point3 eye, Point3 look, Vector3 up);              // like gluLookAt()
 		void roll(GLdouble angle);                                  // roll it
 		void yaw(GLdouble angle);                                   // yaw it
@@ -18,6 +18,6 @@ class Camera {
 		void zoom(double);
 		void setLookAt(Point3);
 		void setView(double);
-		Point3 getEyePosition(void);
+		Point3 getEyePos(void);
 		double getCameraDistance(void);
 };

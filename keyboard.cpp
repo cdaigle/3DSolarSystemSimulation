@@ -76,65 +76,65 @@ void keyboard(unsigned char key, int x, int y) {
 			break;
 
 		case '_': 
-			viewModes[currentViewMode].decrementHourIncrement();
+			viewModes[currentViewMode].decHourIncrement();
 			break;
 		case '=':
-			viewModes[currentViewMode].incrementHourIncrement();
+			viewModes[currentViewMode].incHourIncrement();
 			break;
 		case '[':
-			viewModes[currentViewMode].decrementPlanetRadiusScale();
+			viewModes[currentViewMode].decPlanetRadiusScale();
 			break;
 		case ']':
-			viewModes[currentViewMode].incrementPlanetRadiusScale();
+			viewModes[currentViewMode].incPlanetRadiusScale();
 			break;
 		case ';':
-			viewModes[currentViewMode].decrementStarRadiusScale();
+			viewModes[currentViewMode].decStarRadiusScale();
 			break;
 		case '\'':
-			viewModes[currentViewMode].incrementStarRadiusScale();
+			viewModes[currentViewMode].incStarRadiusScale();
 			break;
 		case '.':
-			viewModes[currentViewMode].decrementOrbitScale();
+			viewModes[currentViewMode].decPlanetOrbitScale();
 			break;
 		case '/':
-			viewModes[currentViewMode].incrementOrbitScale();
+			viewModes[currentViewMode].incPlanetOrbitScale();
 			break;
 		case 'i':
-			viewModes[currentViewMode].incrementSatelliteRadiusScale();
+			viewModes[currentViewMode].incSatelliteRadiusScale();
 			break;
 		case 'I':
-			viewModes[currentViewMode].decrementSatelliteRadiusScale();
+			viewModes[currentViewMode].decSatelliteRadiusScale();
 			break;
 		case 'o':
-			viewModes[currentViewMode].incrementSatelliteOrbitScale();
+			viewModes[currentViewMode].incSatelliteOrbitScale();
 			break;
 		case 'O':
-			viewModes[currentViewMode].decrementSatelliteOrbitScale();
+			viewModes[currentViewMode].decSatelliteOrbitScale();
 			break;
 		
 		case 'p':
-			printf("hourIncrement: %e\n", viewModes[currentViewMode].getHourIncrement());
-			printf("planetRadiusScale: %e\n", viewModes[currentViewMode].getPlanetRadiusScale());
-			printf("starRadiusScale: %e\n", viewModes[currentViewMode].getStarRadiusScale());
-			printf("satelliteRadiusScale: %e\n", viewModes[currentViewMode].getSatelliteRadiusScale());
-			printf("orbitScale: %e\n", viewModes[currentViewMode].getOrbitScale());
-			printf("satelliteOrbitScale: %e\n", viewModes[currentViewMode].getSatelliteOrbitScale());
-			printf("cameraDistance: %f\n", cam.getCameraDistance());
-			printf("eyePosition: %f, %f, %f\n", cam.getEyePosition().x, cam.getEyePosition().y, cam.getEyePosition().z );
+			printf("hourIncrement: %e\n", viewModes[currentViewMode].hourIncrement);
+			printf("planetRadiusScale: %e\n", viewModes[currentViewMode].planetRadiusScale);
+			printf("starRadiusScale: %e\n", viewModes[currentViewMode].starRadiusScale);
+			printf("satelliteRadiusScale: %e\n", viewModes[currentViewMode].satelliteRadiusScale);
+			printf("orbitScale: %e\n", viewModes[currentViewMode].planetOrbitScale);
+			printf("satelliteOrbitScale: %e\n", viewModes[currentViewMode].satelliteOrbitScale);
+			printf("cameraDistance: %f\n", cam.distance);
+			printf("eyePosition: %f, %f, %f\n", cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z );
 			break;
 		
 		case 27: //Esc key - exit
 			exit(0);
 			break;
 	
-		case GLUT_KEY_F1:
+		case 'z':
 			currentViewMode = 0;
-			cam.setView(viewModes[currentViewMode].getInitialCameraDistance());
+			cam.setView(viewModes[currentViewMode].initCameraDistance);
 			break;
-		case GLUT_KEY_F2:
+		case 'x':
 			currentViewMode = 1;
-			cam.setView(viewModes[currentViewMode].getInitialCameraDistance());
+			cam.setView(viewModes[currentViewMode].initCameraDistance);
 			break;
 	}
-	glutPostRedisplay(); //draw it again
+	glutPostRedisplay();
 }

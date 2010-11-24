@@ -13,7 +13,7 @@ ViewMode viewModes[NUM_VIEWMODES] = {
 	ViewMode("EarthView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 1000.0, 50.0, 9.93, 2, 0.0000045, 0.0000001, 0.1067, 0.0001)
 };
 
-Camera cam(viewModes[currentViewMode].getInitialCameraDistance());
+Camera cam(viewModes[currentViewMode].initCameraDistance);
 
 #include "sphere.cpp"
 #include "star.cpp"
@@ -37,7 +37,7 @@ Satellite satellites[NUM_SATELLITES] = {
 };
 
 Star stars[NUM_STARS] = {
-	Star("Stars", 125/viewModes[currentViewMode].getStarRadiusScale(), 0.0, 1.0, "stars.bmp"),
+	Star("Stars", 125/viewModes[currentViewMode].starRadiusScale, 0.0, 1.0, "stars.bmp"),
 	Star("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp")                                               //Sun
 };
 
@@ -91,8 +91,8 @@ void setupTextures(void) {
 void setupCamera(void) {
 	//Set up the viewport and initial camera
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	Point3 eye = viewModes[currentViewMode].getInitialEyePosition();
-	Point3 look = viewModes[currentViewMode].getInitialLookPosition();
+	Point3 eye = viewModes[currentViewMode].initEyePos;
+	Point3 look = viewModes[currentViewMode].initLookPos;
 	Vector3 up(0.0, 1.0, 0.0);
 	cam.set(eye, look, up);
 	cam.setShape(30.0f, WINDOW_WIDTH/WINDOW_HEIGHT, 0.5f, 250.0f);

@@ -1,158 +1,70 @@
 class ViewMode{
 	private:
 		string name;
-		
+
+	public:
 		double planetRadiusScale;
 		double planetRadiusScaleModifier;
 		double starRadiusScale;
 		double starRadiusScaleModifier;
 		double satelliteRadiusScale;
 		double satelliteRadiusScaleModifier;
-		double orbitScale;
-		double orbitScaleModifier;
+
+		double planetOrbitScale;
+		double planetOrbitScaleModifier;
 		double satelliteOrbitScale;
 		double satelliteOrbitScaleModifier;
 		
 		double hourIncrement;
 		double hourIncrementModifier;
 		
-		double cameraDistance;
+		double initCameraDistance;
 
 		int orbitBodyId;
-	public:
-		ViewMode(string nameIn, double pRS, double pRSM, double sRS, double sRSM, double oS, double oSM, double hI, double hIM, double cD, int oBI, double satelliteRadiusScaleIn, double satelliteRadiusScaleModifierIn, double satelliteOrbitScaleIn, double satelliteOrbitScaleModifierIn) {
+		Point3 initEyePos;
+		Point3 initLookPos;
+
+		ViewMode(string nameIn, double pRS, double pRSM, double starRS, double starRSM, double pOS, double pOSM, double hI, double hIM, double cD, int oBI, double satelliteRS, double satelliteRSM, double satelliteOS, double satelliteOSM) {
 			name = nameIn;
 			
 			planetRadiusScale = pRS;
 			planetRadiusScaleModifier = pRSM;
-			starRadiusScale = sRS;
-			starRadiusScaleModifier = sRSM;
-			satelliteRadiusScale = satelliteRadiusScaleIn;
-			satelliteRadiusScaleModifier = satelliteRadiusScaleModifierIn;
-			orbitScale = oS;
-			orbitScaleModifier = oSM;
-			satelliteOrbitScale = satelliteOrbitScaleIn;
-			satelliteOrbitScaleModifier = satelliteOrbitScaleModifierIn;
+			starRadiusScale = starRS;
+			starRadiusScaleModifier = starRSM;
+			satelliteRadiusScale = satelliteRS;
+			satelliteRadiusScaleModifier = satelliteRSM;
+
+			planetOrbitScale = pOS;
+			planetOrbitScaleModifier = pOSM;
+			satelliteOrbitScale = satelliteOS;
+			satelliteOrbitScaleModifier = satelliteOSM;
 			
 			hourIncrement = hI;
 			hourIncrementModifier = hIM;
 			
-			cameraDistance = cD;
+			initCameraDistance = cD;
 
 			orbitBodyId = oBI;
+			initEyePos.set(-10.0f, 1.2f, 0.0f);
+			initLookPos.set(0.0f, 0.0f, 0.0f);
 		}
-		void incrementPlanetRadiusScale(void) { 
-			planetRadiusScale += planetRadiusScaleModifier;
-		}
-		void decrementPlanetRadiusScale(void) {
-			planetRadiusScale -= planetRadiusScaleModifier; 
-			if( planetRadiusScale <= 0.0 ) {
-				planetRadiusScale = 0.0;
-			}
-		}
-		double getPlanetRadiusScale(void) {
-			return planetRadiusScale;
-		}
-		double getPlanetRadiusScaleModifier(void) {
-			return planetRadiusScaleModifier;
-		}
+		void incPlanetRadiusScale(void);
+		void decPlanetRadiusScale(void);
 
-		void incrementStarRadiusScale(void) {
-			starRadiusScale += starRadiusScaleModifier;
-		}
-		void decrementStarRadiusScale(void) {
-			starRadiusScale -= starRadiusScaleModifier; 
-			if( starRadiusScale <= 0.0 ) {
-				starRadiusScale = 0.0;
-			}
-		}
-		double getStarRadiusScale(void) {
-			return starRadiusScale;
-		}
-		double getStarRadiusScaleModifier(void) {
-			return starRadiusScaleModifier;
-		}
+		void incStarRadiusScale(void);
+		void decStarRadiusScale(void);
 		
-		void incrementSatelliteRadiusScale(void) { 
-			satelliteRadiusScale += satelliteRadiusScaleModifier;
-		}
-		void decrementSatelliteRadiusScale(void) {
-			satelliteRadiusScale -= satelliteRadiusScaleModifier; 
-			if( satelliteRadiusScale <= 0.0 ) {
-				satelliteRadiusScale = 0.0;
-			}
-		}
-		double getSatelliteRadiusScale(void) {
-			return satelliteRadiusScale;
-		}
-		double getSatelliteRadiusScaleModifier(void) {
-			return satelliteRadiusScaleModifier;
-		}
+		void incSatelliteRadiusScale(void);
+		void decSatelliteRadiusScale(void);
 
-		void incrementOrbitScale(void) {
-			orbitScale += orbitScaleModifier;
-		}
-		void decrementOrbitScale(void) {
-			orbitScale -= orbitScaleModifier;
-			if( orbitScale <= 0.0 ) {
-				orbitScale = 0.0;
-			}
-		}
-		double getOrbitScale(void) {
-			return orbitScale;
-		}
-		double getOrbitScaleModifier(void) {
-			return orbitScaleModifier;
-		}
+		void incPlanetOrbitScale(void);
+		void decPlanetOrbitScale(void);
 		
-		void incrementSatelliteOrbitScale(void) {
-			satelliteOrbitScale += satelliteOrbitScaleModifier;
-		}
-		void decrementSatelliteOrbitScale(void) {
-			satelliteOrbitScale -= satelliteOrbitScaleModifier;
-			if( satelliteOrbitScale <= 0.0 ) {
-				satelliteOrbitScale = 0.0;
-			}
-		}
-		double getSatelliteOrbitScale(void) {
-			return satelliteOrbitScale;
-		}
-		double getSatelliteOrbitScaleModifier(void) {
-			return satelliteOrbitScaleModifier;
-		}
+		void incSatelliteOrbitScale(void);
+		void decSatelliteOrbitScale(void);
 
-		void incrementHourIncrement(void) {
-			hourIncrement += hourIncrementModifier;
-		}
-		void decrementHourIncrement(void) {
-			hourIncrement -= hourIncrementModifier;
-			if( hourIncrement <= 0.0 ) {
-				hourIncrement = 0.0;
-			}
-		}
-		double getHourIncrement(void) {
-			return hourIncrement;
-		}
-		double getHourIncrementModifier(void) {
-			return hourIncrementModifier;
-		}
-		
-		double getInitialCameraDistance(void) {
-			return cameraDistance;
-		}
-		Point3 getInitialEyePosition(void) {
-			float x = -10.0f;
-			float y = 1.2f;
-			float z = 0.0f;
-			return Point3(x,y,z);
-		}
-		Point3 getInitialLookPosition(void) {
-			float x = 0.0f;
-			float y = 0.0f;
-			float z = 0.0f;
-			return Point3(x,y,z);
-		}
-		int getId(void) {
-			return orbitBodyId;
-		}
+		void incHourIncrement(void);
+		void decHourIncrement(void);
+
+		int getId(void);
 };
