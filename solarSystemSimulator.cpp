@@ -24,7 +24,7 @@ using namespace std;
 #define NUM_STARS 2
 #define NUM_PLANETS 9
 #define NUM_RINGS 2
-#define NUM_SATELLITES 3
+#define NUM_SATELLITES 2
 
 #define NUM_VIEWMODES 7
 
@@ -74,18 +74,20 @@ Planet planets[NUM_PLANETS] =
 	Planet("Pluto", 1150.0, 5913520000.0, 0.55, 90550.0, 17.15, 0.25, 118.0, "plutomap.bmp" )          //Pluto
 };
 
-Ring rings[NUM_RINGS] = {
+Ring rings[NUM_RINGS] =
+{
 	Ring("SaturnRing", 67000.0, 139380.0, "saturnringcolor.bmp", 5, planets[5].tiltDegree),	//Saturn's Rings - outer radius smaller than actual outer radius for aesthetic reasons
 	Ring("UranusRing", 41837.0, 51149.0, "uranusringcolor.bmp", 6, planets[6].tiltDegree)	//Uranus' Rings
 };
 
-Satellite satellites[NUM_SATELLITES] = {
+Satellite satellites[NUM_SATELLITES] =
+{
 	Satellite("Moon", 3476.0, 384400.0, 1.0, 27.32, 5.14, 0.05, "moonmap.bmp", 2),                       //Earth's Moon
-	Satellite("Phobos", 22.2, 9378.0, 1.0, 27.32, 5.14, 0.05, "phobosmap.bmp", 3),
-	Satellite("Io", 3630.0, 422000.0, 1.0, 27.32, 5.14, 0.05, "iomap.bmp", 4)
+	Satellite("Phobos", 22.2, 9378.0, 1.0, 27.32, 5.14, 0.05, "phobosmap.bmp", 3)
 };
 
-Star stars[NUM_STARS] = {
+Star stars[NUM_STARS] =
+{
 	Star("Stars", 125/views[viewId].starRadiusScale, 0.0, 1.0, "stars.bmp"),
 	Star("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp")                                               //Sun
 };
