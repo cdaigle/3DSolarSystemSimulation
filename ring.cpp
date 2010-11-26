@@ -16,12 +16,18 @@ void Ring :: drawRing(double radiusScale, Point3 currentPosition) {
 	glBindTexture(GL_TEXTURE_2D,textureId);
 	glPushMatrix();
 	glTranslated(currentPosition.x, currentPosition.y, currentPosition.z);
-	glRotated (90, 1, 0, 0);
+	glRotated (ringRotation + 90, 1, 0, 0);
 
-	//for (double i = 0; i <= TWOPI; i+= PI/2) {
-	//	gluPartialDisk(quadratic, innerRadius*radiusScale, outerRadius*radiusScale, 40, 40, i, i + PI/2);
-	//}
+	glBegin (GL_QUAD_STRIP);
+	for (double angle=0; angle<=360; angle+= 0.2) {
+		glNormal3f(0.0,0.0,1.0);
+		glTexCoord2f (0.0, 1.0);
+		glVertex3d (outerRadius * radiusScale * cos(angle), outerRadius * radiusScale * sin(angle), 0.0);
+		glNormal3f (0.0, 0.0, 1.0);
+		glTexCoord2f (1.0, 0.0);
+		glVertex3d (innerRadius * radiusScale * cos(angle), innerRadius * radiusScale * sin(angle), 0.0);
+	}
+	glEnd ();
 
-	gluDisk(quadratic, innerRadius*radiusScale, outerRadius*radiusScale, 40, 40);
 	glPopMatrix();
 }

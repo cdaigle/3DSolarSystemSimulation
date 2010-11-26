@@ -8,14 +8,16 @@ class Ring{
 		string name;
 		double innerRadius;
 		double outerRadius;
+		double ringRotation;
 
 	public:
-		Ring(string nameIn, double innerRadiusIn, double outerRadiusIn, string texturePathIn, int planetIn) {
+		Ring(string nameIn, double innerRadiusIn, double outerRadiusIn, string texturePathIn, int planetIn, double rotationIn) {
 			innerRadius = innerRadiusIn;
 			outerRadius = outerRadiusIn;
 			texturePath = texturePathIn;
 			name = nameIn;
 			planetId = planetIn;
+			ringRotation = rotationIn;
 		}
 		int textureId;
 		int planetId;

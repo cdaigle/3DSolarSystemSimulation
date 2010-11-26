@@ -5,7 +5,7 @@
 class Sphere
 {
 	private:
-		double radius, tiltDegree;
+		double radius;
 		double albeldo;            //reflectiveness
 		string name, texturePath;
 		Point3 currentPosition;
@@ -25,7 +25,7 @@ class Sphere
 			rotationalAxis.set(0.0, cos(tiltDegree*DEG2RAD), sin(tiltDegree*DEG2RAD));
 		}
 		int textureId;
-		double orbitDegree, orbitDistance;
+		double orbitDegree, orbitDistance, tiltDegree;
 
 		// Implemented in sphere.cpp
 		void draw(double);

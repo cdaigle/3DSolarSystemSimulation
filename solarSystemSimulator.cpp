@@ -23,7 +23,7 @@ using namespace std;
 
 #define NUM_STARS 2
 #define NUM_PLANETS 9
-#define NUM_RINGS 1
+#define NUM_RINGS 2
 #define NUM_SATELLITES 3
 
 #define NUM_VIEWMODES 7
@@ -75,7 +75,8 @@ Planet planets[NUM_PLANETS] =
 };
 
 Ring rings[NUM_RINGS] = {
-	Ring("SaturnRing", 67000.0, 173800.0, "saturnringcolor.bmp", 5)
+	Ring("SaturnRing", 67000.0, 139380.0, "saturnringcolor.bmp", 5, planets[5].tiltDegree),	//Saturn's Rings - outer radius smaller than actual outer radius for aesthetic reasons
+	Ring("UranusRing", 41837.0, 51149.0, "uranusringcolor.bmp", 6, planets[6].tiltDegree)	//Uranus' Rings
 };
 
 Satellite satellites[NUM_SATELLITES] = {
