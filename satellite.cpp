@@ -5,32 +5,39 @@
 
 #include "satellite.h"
 
-double Satellite :: getOrbitX(double theta) {
+double Satellite :: getOrbitX(double theta)
+{
 	return cos(theta) * views[viewId].satelliteOrbitScale;// * scaleOrbit();
 }
 
-double Satellite :: getOrbitY(double theta) {
+double Satellite :: getOrbitY(double theta)
+{
 	return 0.0;
 }
 
-double Satellite :: getOrbitZ(double theta) {
+double Satellite :: getOrbitZ(double theta)
+{
 	return sin(theta) * views[viewId].satelliteOrbitScale;// * scaleOrbit();
 }
 
-void Satellite :: draw() {
+void Satellite :: draw()
+{
 	if( enabled == true ) {
 		Sphere :: draw(views[viewId].satelliteRadiusScale);
 	}
 }
 
-void Satellite :: drawOrbit() {
-	if( enabled == true && orbitEnabled == true ) {
+void Satellite :: drawOrbit()
+{
+	if( enabled == true && orbitEnabled == true )
+	{
 		glPushMatrix();
 			Point3 pt = getCurrentPosition();
 			glTranslated(planetPosition.x, planetPosition.y, planetPosition.z);
 			glBegin(GL_LINE_STRIP);
 				
-				for( double i = -PI; i <= PI; i+= PI/300 ) {
+				for( double i = -PI; i <= PI; i+= PI/300 )
+				{
 					glVertex3f(getOrbitX(i), getOrbitY(i), getOrbitZ(i));
 				}
 				glVertex3f(getOrbitX(-PI), getOrbitY(-PI), getOrbitZ(-PI)); //make sure the ellipse is complete
@@ -39,20 +46,29 @@ void Satellite :: drawOrbit() {
 	}
 }
 
-void Satellite :: move(Planet planet) {
+void Satellite :: move(Planet planet)
+{
 	double theta = ((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
 	planetPosition = planet.getCurrentPosition();
 	setCurrentPosition(planetPosition.x+getOrbitX(theta), planetPosition.y+getOrbitY(theta), planetPosition.z+getOrbitZ(theta));
 }
 
-int Satellite :: getPlanetId() {
+int Satellite :: getPlanetId()
+{
 	return planetId;
 }
 
-void Satellite :: toggle() {
+void Satellite :: toggle()
+{
 	enabled = !enabled;
 }
 
-void Satellite :: toggleOrbit() {
+void Satellite :: toggleOrbit()
+{
 	orbitEnabled = !orbitEnabled;
+}
+
+bool Satellite :: isEnabled()
+{
+	return enabled;
 }

@@ -17,4 +17,5 @@ void mouse(int x, int y) {
 
 void mouseWheel(int wheel, int direction, int x, int y) {
 	cam.zoom(-direction/2.0);
+	glutPostRedisplay();
 }

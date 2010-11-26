@@ -2,7 +2,8 @@
  * keyboard : Handles all keyboard actions recieved from OpenGL callbacks
  */
 
-void keyboard(unsigned char key, int x, int y) {
+void keyboard(unsigned char key, int x, int y)
+{
 	switch(key)
 	{	
 	// slide controls for camera
@@ -36,8 +37,10 @@ void keyboard(unsigned char key, int x, int y) {
 		case '9': 
 			planets[key-49].toggle();
 			break;
+		
 		case '0': 
-			for( int i = 0; i < NUM_PLANETS; i++ ) {
+			for( int i = 0; i < NUM_PLANETS; i++ )
+			{
 				planets[i].toggleOrbit();
 			}
 			break;
@@ -52,25 +55,26 @@ void keyboard(unsigned char key, int x, int y) {
 			satellites[0].toggle();
 			break;
 		case '$':
-			satellites[1].toggle();
+			//satellites[1].toggle();
 			break;
 		case '%':
-			satellites[2].toggle();
+			//satellites[2].toggle();
 			break;
 		case '^':
-			satellites[3].toggle();
+			//satellites[3].toggle();
 			break;
 		case '&':
-			satellites[4].toggle();
+			//satellites[4].toggle();
 			break;
 		case '*':
-			satellites[5].toggle();
+			//satellites[5].toggle();
 			break;
 		case '(':
-			satellites[6].toggle();
+			//satellites[6].toggle();
 			break;
 		case ')':
-			for( int i = 0; i < NUM_SATELLITES; i++ ) {
+			for( int i = 0; i < NUM_SATELLITES; i++ )
+			{
 				satellites[i].toggleOrbit();
 			}
 			break;
