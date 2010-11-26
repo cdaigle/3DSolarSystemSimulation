@@ -22,6 +22,7 @@ using namespace std;
 
 #define NUM_STARS 2
 #define NUM_PLANETS 9
+#define NUM_RINGS 1
 #define NUM_SATELLITES 1
 
 #define NUM_VIEWMODES 2
@@ -51,6 +52,7 @@ Camera cam(views[viewId].initCameraDistance);
 #include "star.cpp"
 #include "planet.cpp"
 #include "satellite.cpp"
+#include "ring.cpp"
 
 Planet planets[NUM_PLANETS] = {
 	Planet("Mercury", 2400.0, 57910000.0, 0.11, 87.97, 7.0, 0.21, "mercurymap.bmp"),            //Mercury
@@ -64,6 +66,10 @@ Planet planets[NUM_PLANETS] = {
 	Planet("Pluto", 1150.0, 5913520000.0, 0.55, 90550.0, 17.15, 0.25, "plutomap.bmp" )          //Pluto
 };
 
+Ring rings[NUM_RINGS] = {
+	Ring("SaturnRing", 67000.0, 173800.0, "saturnringcolor.bmp", 5)
+};
+
 Satellite satellites[NUM_SATELLITES] = {
 	Satellite("Moon", 3476, 384400.0, 1.0, 27.32, 5.14, 0.05, "moonmap.bmp", 2)                 //Earth's Moon
 };
@@ -75,6 +81,7 @@ Star stars[NUM_STARS] = {
 
 RGBpixmap starPixmaps[NUM_STARS];
 RGBpixmap planetPixmaps[NUM_PLANETS];
+RGBpixmap ringPixmaps[NUM_RINGS];
 RGBpixmap satellitePixmaps[NUM_SATELLITES];
 
 #include "init.cpp"

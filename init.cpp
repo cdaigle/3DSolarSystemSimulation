@@ -37,6 +37,12 @@ void setupTextures(void) {
 		int value = planetPixmaps[i].readBMPFile(planets[i].getTexturePath());
 		planetPixmaps[i].setTexture(planets[i].textureId);
 	}
+
+	for( int i = 0; i < NUM_RINGS; i++ ) {
+		rings[i].textureId = 4000 + i;
+		int value = ringPixmaps[i].readBMPFile(rings[i].getTexturePath());
+		ringPixmaps[i].setTexture(rings[i].textureId);
+	}
 	
 	for( int i = 0; i < NUM_SATELLITES; i++ ) {
 		satellites[i].textureId = 3001 + NUM_PLANETS + i;

@@ -45,6 +45,11 @@ void display(void) {
 			planets[i].drawOrbit();
 		}
 		
+		//Draw the rings
+		for( int i = 0; i < NUM_RINGS; i++ ) {
+			rings[i].drawRing(views[viewId].planetRadiusScale, planets[rings[i].planetId].getCurrentPosition());
+		}
+
 		//Draw the satellites
 		for( int i = 0; i < NUM_SATELLITES; i++ ) {
 			satellites[i].draw();

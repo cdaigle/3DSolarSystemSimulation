@@ -12,6 +12,7 @@ class Sphere{
 		string name;
 	public:
 		// Constructor
+		Sphere(){}
 		Sphere(string nameIn, double radiusIn, double orbitDistance, double albeldoIn, string texturePathIn) {
 			radius = radiusIn;
 			orbitingDistance = orbitDistance;

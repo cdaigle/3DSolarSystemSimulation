@@ -5,6 +5,7 @@
 class Planet : public Sphere
 {
 	public:
+		Planet(): Sphere(){}
 		Planet(
 			string nameIn, 
 			double radiusIn, 
