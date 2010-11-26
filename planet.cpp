@@ -46,7 +46,10 @@ void Planet :: draw()
 {
 	if( enabled == true )
 	{
-		Sphere :: draw(views[viewId].planetRadiusScale);
+		glPushMatrix();
+			glRotated(inclination, 0, 0, 1);
+			Sphere :: draw(views[viewId].planetRadiusScale);
+		glPopMatrix();
 	}
 }
 
@@ -56,6 +59,7 @@ void Planet :: drawOrbit()
 	if( enabled == true && orbitEnabled == true )
 	{
 		glPushMatrix();
+			glRotated(inclination, 0, 0, 1);
 			glBegin(GL_LINE_STRIP);
 				for( double i = -PI; i <= PI; i+= PI/300 )
 				{

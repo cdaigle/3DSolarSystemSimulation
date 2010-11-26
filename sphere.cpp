@@ -1,10 +1,11 @@
 /**
  * sphere : high-level abstraction for spheres.
- *          Moons and Planets will extend this.
+ *          Moons and Planets extend this.
  */
 #include "sphere.h"
 
-void Sphere :: draw(double radiusScale) {
+void Sphere :: draw(double radiusScale) 
+{
 	glPushMatrix();
 		position();
 		rotate();
@@ -34,12 +35,24 @@ void Sphere :: rotate()
 void Sphere :: create(double radiusScale)
 {
 	applyTexture();
+	applyLighting();
+	applyMaterial();
 	GLUquadricObj *quadratic = NULL;
-	quadratic = gluNewQuadric();                                    // Create A Pointer To The Quadric Object
+	quadratic = gluNewQuadric();                // Create A Pointer To The Quadric Object
 	gluQuadricDrawStyle(quadratic, GLU_FILL);
-	gluQuadricTexture(quadratic, GL_TRUE);                          // Create Texture Coords
-	gluQuadricNormals(quadratic, GLU_SMOOTH);                       // Create Smooth Normals
+	gluQuadricTexture(quadratic, GL_TRUE);      // Create Texture Coords
+	gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
 	glRotated (tiltDegree, 1, 0, 0);
 	glRotated (270, 1, 0, 0);
 	gluSphere(quadratic, radius*radiusScale, 40, 40);
+}
+
+void Sphere :: applyLighting()
+{
+	
+}
+
+void Sphere :: applyMaterial()
+{
+	
 }

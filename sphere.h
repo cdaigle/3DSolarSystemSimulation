@@ -33,6 +33,8 @@ class Sphere
 		void rotate(void);
 		void create(double);
 		void applyTexture(void);
+		void applyLighting(void);
+		void applyMaterial(void);
 
 		// Implemented here
 		string getTexturePath(void)

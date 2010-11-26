@@ -99,7 +99,6 @@ RGBpixmap satellitePixmaps[NUM_SATELLITES];
 
 #include "init.cpp"
 #include "keyboard.cpp"
-#include "mouse.cpp"
 #include "display.cpp"
 #include "simulator.cpp"
 #include "main.cpp"
