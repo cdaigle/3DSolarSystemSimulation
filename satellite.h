@@ -5,6 +5,7 @@
 class Satellite : public Sphere
 {
 	public:
+		Satellite() : Sphere() {}
 		Satellite(
 			string nameIn, 
 			double radiusIn, 
@@ -16,10 +17,11 @@ class Satellite : public Sphere
 			string texturePathIn, 
 			int planetIdIn
 		) :	Sphere(
-			nameIn, 
-			radiusIn, 
-			orbitDistance, 
-			albeldoIn, 
+			nameIn,
+			radiusIn,
+			orbitDistance,
+			albeldoIn,
+			0.0,
 			texturePathIn
 		) 
 		{ 

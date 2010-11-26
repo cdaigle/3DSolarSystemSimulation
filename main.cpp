@@ -2,7 +2,27 @@
  * main.cpp - main function
  */
 
-int main(int argc, char * argv[]) {
+void mouse(int x, int y)
+{
+	static int prevX, prevY;
+	int deltaX = x - prevX, deltaY = y - prevY, tol = 3;
+	
+	if( abs(deltaX) > 0.0 && abs(deltaY) < tol ) {
+		cam.swing(deltaX);
+	}
+	
+	glutPostRedisplay();
+	prevX = x;
+	prevY = y;
+}
+
+void mouseWheel(int wheel, int direction, int x, int y) {
+	cam.zoom(-direction/2.0);
+	glutPostRedisplay();
+}
+
+int main(int argc, char * argv[])
+{
 	// initialize GLUT
 	glutInit( &argc, argv );		
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);

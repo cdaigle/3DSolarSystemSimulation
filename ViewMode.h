@@ -1,4 +1,5 @@
-class ViewMode{
+class ViewMode
+{
 	private:
 		string name;
 
@@ -24,7 +25,23 @@ class ViewMode{
 		Point3 initEyePos;
 		Point3 initLookPos;
 
-		ViewMode(string nameIn, double pRS, double pRSM, double starRS, double starRSM, double pOS, double pOSM, double hI, double hIM, double cD, int oBI, double satelliteRS, double satelliteRSM, double satelliteOS, double satelliteOSM) {
+		ViewMode(
+			string nameIn, 
+			double pRS, 
+			double pRSM, 
+			double starRS, 
+			double starRSM, 
+			double pOS, 
+			double pOSM, 
+			double hI, 
+			double hIM, 
+			double cD, 
+			int oBI, 
+			double satelliteRS, 
+			double satelliteRSM, 
+			double satelliteOS, 
+			double satelliteOSM	)
+		{
 			name = nameIn;
 			
 			planetRadiusScale = pRS;

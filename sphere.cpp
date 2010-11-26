@@ -5,33 +5,41 @@
 #include "sphere.h"
 
 void Sphere :: draw(double radiusScale) {
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glPushMatrix();
+		position();
+		rotate();
+		create(radiusScale);
+	glPopMatrix();	
 
+	glEnable(GL_DEPTH_TEST);
+}
+
+void Sphere :: applyTexture()
+{
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);	// Linear Filtering
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+}
+void Sphere :: position()
+{
+	glTranslated(currentPosition.x, currentPosition.y, currentPosition.z);
+}
+
+void Sphere :: rotate()
+{
+	glRotated (orbitDegree, rotationalAxis.x, rotationalAxis.y, rotationalAxis.z);
+}
+
+void Sphere :: create(double radiusScale)
+{
+	applyTexture();
 	GLUquadricObj *quadratic = NULL;
 	quadratic = gluNewQuadric();                                    // Create A Pointer To The Quadric Object
 	gluQuadricDrawStyle(quadratic, GLU_FILL);
 	gluQuadricTexture(quadratic, GL_TRUE);                          // Create Texture Coords
 	gluQuadricNormals(quadratic, GLU_SMOOTH);                       // Create Smooth Normals
-	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);	// Linear Filtering
-	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-	//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-	//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-	//glEnable(GL_TEXTURE_GEN_S);
-	//glEnable(GL_TEXTURE_GEN_T);
-	glBindTexture(GL_TEXTURE_2D,textureId);
-
-	glPushMatrix();
-		glTranslated(currentPosition.x, currentPosition.y, currentPosition.z);
-		glRotated (90, 1, 0, 0);
-		gluSphere(quadratic, radius*radiusScale, 40, 40);
-	glPopMatrix();	
-
-	glEnable(GL_DEPTH_TEST);
-
-	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-}
-
-//Returns the scaled orbit distance
-double Sphere :: scaleOrbit() {
-	return orbitingDistance * views[viewId].planetOrbitScale;
+	glRotated (tiltDegree, 1, 0, 0);
+	glRotated (270, 1, 0, 0);
+	gluSphere(quadratic, radius*radiusScale, 40, 40);
 }

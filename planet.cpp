@@ -21,7 +21,7 @@ double Planet :: getOrbitZ(double theta)
 
 double Planet :: getSemiMajorAxis()
 {
-	return scaleOrbit(); 
+	return orbitDistance*views[viewId].planetOrbitScale; 
 }
 
 double Planet :: getSemiMinorAxis()
@@ -34,6 +34,11 @@ void Planet :: move()
 {
 	double theta = ((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
 	setCurrentPosition(getOrbitX(theta),getOrbitY(),getOrbitZ(theta));
+	orbitDegree -= 1.0; //(hoursPassedToday / 24.0) / 360.0;
+	if (orbitDegree < -360.0)
+	{
+		orbitDegree += 360.0;
+	}
 }
 
 //Draws the planet, it if is enabled.  Passes in radius scale to super draw method

@@ -14,12 +14,14 @@ class Planet : public Sphere
 			double daysToOrbitIn, 
 			double inclinationIn, 
 			double eccentricityIn, 
+			double tiltIn,
 			string texturePathIn
 		) : Sphere (
 			nameIn, 
 			radiusIn, 
 			orbitDistance, 
 			albeldoIn, 
+			tiltIn,
 			texturePathIn
 		)
 		{ 

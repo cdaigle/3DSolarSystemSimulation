@@ -2,35 +2,53 @@
  * sphere.h
  */
 
-class Sphere{
+class Sphere
+{
 	private:
-		double radius;
-		Point3 currentPosition;
+		double radius, tiltDegree;
 		double albeldo;            //reflectiveness
-		double orbitingDistance;
-		string texturePath;
-		string name;
+		string name, texturePath;
+		Point3 currentPosition;
+		Vector3 rotationalAxis;
 	public:
 		// Constructor
 		Sphere(){}
-		Sphere(string nameIn, double radiusIn, double orbitDistance, double albeldoIn, string texturePathIn) {
+		Sphere(string nameIn, double radiusIn, double orbitDistanceIn, double albeldoIn, double tiltDegreeIn, string texturePathIn) 
+		{
 			radius = radiusIn;
-			orbitingDistance = orbitDistance;
+			orbitDistance = orbitDistanceIn;
 			albeldo = albeldoIn;
 			texturePath = texturePathIn;
 			name = nameIn;
+			orbitDegree = 0.0;
+			tiltDegree = tiltDegreeIn;
+			rotationalAxis.set(0.0, cos(tiltDegree*DEG2RAD), sin(tiltDegree*DEG2RAD));
 		}
 		int textureId;
+		double orbitDegree, orbitDistance;
 
 		// Implemented in sphere.cpp
 		void draw(double);
-		double scaleOrbit(void);
+		void position(void);
+		void rotate(void);
+		void create(double);
+		void applyTexture(void);
 
 		// Implemented here
-		string getTexturePath(void){ return texturePath; }
-		string getName(void) { return name; }
-		double getRadius(double radiusScale) { return radius * radiusScale; }
-		void setCurrentPosition(Point3 point){ currentPosition.set(point); }
-		void setCurrentPosition(double x, double y, double z){ currentPosition.set(x,y,z);}
-		Point3 getCurrentPosition(void){return currentPosition;}
+		string getTexturePath(void)
+		{ 
+			return texturePath; 
+		}
+		void setCurrentPosition(Point3 point)
+		{
+			currentPosition.set(point);
+		}
+		void setCurrentPosition(double x, double y, double z)
+		{
+			currentPosition.set(x,y,z);
+		}
+		Point3 getCurrentPosition(void)
+		{
+			return currentPosition;
+		}
 };

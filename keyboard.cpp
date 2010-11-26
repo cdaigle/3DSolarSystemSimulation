@@ -141,6 +141,31 @@ void keyboard(unsigned char key, int x, int y)
 			printf("Changing view: EarthView\n");
 			cam.setView(views[viewId].initCameraDistance);
 			break;
+		case 'c':
+			viewId = 2;
+			printf("Changing view: MarsView\n");
+			cam.setView(views[viewId].initCameraDistance);
+			break;
+		case 'v':
+			viewId = 3;
+			printf("Changing view: JupiterView\n");
+			cam.setView(views[viewId].initCameraDistance);
+			break;
+		case 'b':
+			viewId = 4;
+			printf("Changing view: SaturnView\n");
+			cam.setView(views[viewId].initCameraDistance);
+			break;
+		case 'n':
+			viewId = 5;
+			printf("Changing view: UranusView\n");
+			cam.setView(views[viewId].initCameraDistance);
+			break;
+		case 'm':
+			viewId = 6;
+			printf("Changing view: NeptuneView\n");
+			cam.setView(views[viewId].initCameraDistance);
+			break;
 	}
 	glutPostRedisplay();
 }
