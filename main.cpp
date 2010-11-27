@@ -92,7 +92,7 @@ static void SatellitesSubMenu (int value)
 	}
 	else
 	{
-		satellites[value-NUM_PLANETS].toggleOrbit();
+		satellites[value-NUM_SATELLITES].toggleOrbit();
 	}
 }
 
@@ -102,6 +102,9 @@ static void MainMenu(int value)
 	{
 		case 1:
 			simulationRunning = !simulationRunning;
+			break;
+		case 2:
+			exit(1);
 			break;
 	}
 }
@@ -130,22 +133,8 @@ void createMenu() {
 	for (int i = 0; i < NUM_PLANETS; i++)
 	{
 		planetsSubMenu[i] = glutCreateMenu(PlanetsSubMenu);
-		if (planets[i].isEnabled())
-		{
-			glutAddMenuEntry("Hide Planet", i);
-		}
-		else
-		{
-			glutAddMenuEntry("Show Planet", i);
-		}
-		if (planets[i].isOrbitEnabled())
-		{
-			glutAddMenuEntry("Hide Orbital Path", i+NUM_PLANETS);
-		}
-		else
-		{
-			glutAddMenuEntry("Show Orbital Path", i+NUM_PLANETS);
-		}
+		glutAddMenuEntry("Show/Hide Planet", i);
+		glutAddMenuEntry("Show/Hide Orbital Path", i+NUM_PLANETS);
 	}
 	int planetsMenu = glutCreateMenu(PlanetMenu);
 	for (int i = 0; i < NUM_PLANETS; i++)
@@ -163,22 +152,8 @@ void createMenu() {
 	for (int i = 0; i < NUM_SATELLITES; i++)
 	{
 		satellitesSubMenu[i] = glutCreateMenu(SatellitesSubMenu);
-		if (satellites[i].isEnabled())
-		{
-			glutAddMenuEntry("Hide Satellite", i);
-		}
-		else
-		{
-			glutAddMenuEntry("Show Satellite", i);
-		}
-		if (satellites[i].isOrbitEnabled())
-		{
-			glutAddMenuEntry("Hide Orbital Path", i+NUM_SATELLITES);
-		}
-		else
-		{
-			glutAddMenuEntry("Show Orbital Path", i+NUM_SATELLITES);
-		}
+		glutAddMenuEntry("Show/Hide Satellite", i);
+		glutAddMenuEntry("Show/Hide Orbital Path", i+NUM_SATELLITES);
 	}
 	int satellitesMenu = glutCreateMenu(SatelliteMenu);
 	for (int i = 0; i < NUM_SATELLITES; i++)
@@ -197,14 +172,9 @@ void createMenu() {
 	glutAddSubMenu("View Modes", viewModesMenu);
 	glutAddSubMenu("Planets",	 planetsMenu);
 	glutAddSubMenu("Satellites", satellitesMenu);
-	if (simulationRunning)
-	{
-		glutAddMenuEntry("Stop Simulation", 1);
-	}
-	else
-	{
-		glutAddMenuEntry("Start Simulation", 1);
-	}
+	glutAddMenuEntry("Start/Stop Simulation", 1);
+	glutAddMenuEntry("Quit", 2);
+
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
