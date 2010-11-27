@@ -31,6 +31,8 @@ class Planet : public Sphere
 			inclination = inclinationIn;
 			eccentricity = eccentricityIn;
 		}
+		double inclination;
+
 		void move(void);
 		void toggle(void);
 		void toggleOrbit(void);
@@ -50,6 +52,5 @@ class Planet : public Sphere
 		bool enabled;
 		bool orbitEnabled;
 		double daysToOrbit;
-		double inclination;
 		double eccentricity;		
 };

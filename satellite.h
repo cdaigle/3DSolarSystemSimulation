@@ -15,7 +15,8 @@ class Satellite : public Sphere
 			double inclinationIn, 
 			double eccentricityIn, 
 			string texturePathIn, 
-			int planetIdIn
+			int planetIdIn,
+			double planetInclinationIn
 		) :	Sphere(
 			nameIn,
 			radiusIn,
@@ -31,6 +32,7 @@ class Satellite : public Sphere
 			planetId = planetIdIn;
 			enabled = true;
 			orbitEnabled = true;
+			planetInclination = planetInclinationIn;
 			planetPosition.set(0.0f, 0.0f, 0.0f);
 		}
 		void draw(void);
@@ -49,10 +51,7 @@ class Satellite : public Sphere
 
 	private:
 		int planetId;
-		bool enabled;
-		bool orbitEnabled;
-		double daysToOrbit;
-		double inclination;
-		double eccentricity;
+		bool enabled, orbitEnabled;
+		double daysToOrbit, inclination, eccentricity, planetInclination;
 		Point3 planetPosition;
 };

@@ -1,23 +1,28 @@
 /**
- * ring.h
+ * Ring Class - deals with the rings for the planets
  */
 
-class Ring{
+class Ring
+{
 	private:
 		string texturePath;
 		string name;
 		double innerRadius;
 		double outerRadius;
 		double ringRotation;
+		double inclDegree;
+		bool enabled;
 
 	public:
-		Ring(string nameIn, double innerRadiusIn, double outerRadiusIn, string texturePathIn, int planetIn, double rotationIn) {
+		Ring(string nameIn, double innerRadiusIn, double outerRadiusIn, string texturePathIn, int planetIn, double rotationIn, double inclinationIn) {
 			innerRadius = innerRadiusIn;
 			outerRadius = outerRadiusIn;
 			texturePath = texturePathIn;
 			name = nameIn;
 			planetId = planetIn;
 			ringRotation = rotationIn;
+			inclDegree = inclinationIn;
+			enabled = true;
 		}
 		int textureId;
 		int planetId;
@@ -29,7 +34,9 @@ class Ring{
 			return outerRadius;
 		}
 
-		void drawRing(double, Point3);
+		void draw(double, Point3);
+		void toggle(void);
+		void setEnabled(bool);
 		string getTexturePath(void){ return texturePath; }
 		string getName(void) { return name; }
 };

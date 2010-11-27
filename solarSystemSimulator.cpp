@@ -24,7 +24,7 @@ using namespace std;
 #define NUM_STARS 2
 #define NUM_PLANETS 9
 #define NUM_RINGS 2
-#define NUM_SATELLITES 2
+#define NUM_SATELLITES 3
 
 #define NUM_VIEWMODES 7
 
@@ -77,15 +77,16 @@ Planet planets[NUM_PLANETS] =
 Ring rings[NUM_RINGS] =
 {
 	//Saturn's Rings - outer radius smaller than actual outer radius for aesthetic reasons
-	Ring("SaturnRing", 67000.0, 139380.0, "saturnringcolor.bmp", 5, planets[5].tiltDegree),	
+	Ring("SaturnRing", 67000.0, 139380.0, "saturnringcolor.bmp", 5, planets[5].tiltDegree, planets[5].inclination),	
 	//Uranus' Rings
-	Ring("UranusRing", 41837.0, 51149.0, "uranusringcolor.bmp", 6, planets[6].tiltDegree)
+	Ring("UranusRing", 41837.0, 51149.0, "uranusringcolor.bmp", 6, planets[6].tiltDegree, planets[6].inclination)
 };
 
 Satellite satellites[NUM_SATELLITES] =
 {
-	Satellite("Moon", 3476.0, 384400.0, 1.0, 27.32, 5.14, 0.05, "moonmap.bmp", 2),  //Earth's Moon
-	Satellite("Phobos", 22.2, 9378.0, 1.0, 27.32, 5.14, 0.05, "phobosmap.bmp", 3)
+	Satellite("Moon", 3476.0, 384400.0, 0.1, 27.32, 5.14, 0.05, "moonmap.bmp", 2, planets[2].inclination),        //Earth's Moon
+	Satellite("Phobos", 2222.2, 9378.0, 0.1, 0.32, 1.00, 0.02, "phobosmap.bmp", 3, planets[3].inclination),       //Mar's Satellite     (one of them)
+	Satellite("Europa", 3569.0, 670900000000.0, 0.1, 3.55, 0.47, 0.01, "europamap.bmp", 4, planets[4].inclination)  //Jupiter's Satellite (one of them)
 };
 
 Star stars[NUM_STARS] =

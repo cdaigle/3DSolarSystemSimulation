@@ -23,7 +23,13 @@ double Satellite :: getOrbitZ(double theta)
 void Satellite :: draw()
 {
 	if( enabled == true ) {
-		Sphere :: draw(views[viewId].satelliteRadiusScale);
+		glPushMatrix();
+			//glRotated(inclination, 1, 0, 0);
+			glPushMatrix();
+				glRotated(planetInclination, 0, 0, 1);
+				Sphere :: draw(views[viewId].satelliteRadiusScale);
+			glPopMatrix();
+		glPopMatrix();
 	}
 }
 
@@ -32,16 +38,21 @@ void Satellite :: drawOrbit()
 	if( enabled == true && orbitEnabled == true )
 	{
 		glPushMatrix();
-			Point3 pt = getCurrentPosition();
-			glTranslated(planetPosition.x, planetPosition.y, planetPosition.z);
-			glBegin(GL_LINE_STRIP);
-				
-				for( double i = -PI; i <= PI; i+= PI/300 )
-				{
-					glVertex3f(getOrbitX(i), getOrbitY(i), getOrbitZ(i));
-				}
-				glVertex3f(getOrbitX(-PI), getOrbitY(-PI), getOrbitZ(-PI)); //make sure the ellipse is complete
-			glEnd();
+			//glRotated(inclination, 1, 0, 0);
+			glPushMatrix();
+				glRotated(planetInclination, 0, 0, 1);
+				glPushMatrix();
+					Point3 pt = getCurrentPosition();
+					glTranslated(planetPosition.x, planetPosition.y, planetPosition.z);
+					glBegin(GL_LINE_STRIP);
+						for( double i = -PI; i <= PI; i+= PI/300 )
+						{
+							glVertex3f(getOrbitX(i), getOrbitY(i), getOrbitZ(i));
+						}
+						glVertex3f(getOrbitX(-PI), getOrbitY(-PI), getOrbitZ(-PI)); //make sure the ellipse is complete
+					glEnd();
+				glPopMatrix();
+			glPopMatrix();
 		glPopMatrix();
 	}
 }

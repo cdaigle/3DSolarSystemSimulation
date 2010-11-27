@@ -38,6 +38,18 @@ static void PlanetMenu (int value)
 				planets[i].setOrbitEnabled(false);
 			}
 			break;
+		case 5:
+			for (int i = 0; i < NUM_RINGS; i++)
+			{
+				rings[i].setEnabled(true);
+			}
+			break;
+		case 6:
+			for (int i = 0; i < NUM_RINGS; i++)
+			{
+				rings[i].setEnabled(false);
+			}
+			break;
 	}
 }
 
@@ -74,7 +86,11 @@ static void SatelliteMenu (int value)
 
 static void PlanetsSubMenu (int value)
 {
-	if (value < NUM_PLANETS)
+	if (value < 0)
+	{
+		rings[abs(value+1)].toggle();
+	}
+	else if(value < NUM_PLANETS)
 	{
 		planets[value].toggle();
 	}
@@ -135,6 +151,13 @@ void createMenu() {
 		planetsSubMenu[i] = glutCreateMenu(PlanetsSubMenu);
 		glutAddMenuEntry("Show/Hide Planet", i);
 		glutAddMenuEntry("Show/Hide Orbital Path", i+NUM_PLANETS);
+		for (int j = 0; j < NUM_RINGS; j++)
+		{
+			if (rings[j].planetId == i)
+			{
+				glutAddMenuEntry("Show/Hide Ring", -(j+1));
+			}
+		}
 	}
 	int planetsMenu = glutCreateMenu(PlanetMenu);
 	for (int i = 0; i < NUM_PLANETS; i++)
@@ -148,6 +171,9 @@ void createMenu() {
 	glutAddMenuEntry("Hide All Planets", 2);
 	glutAddMenuEntry("Show All Planets Orbital Paths", 3);
 	glutAddMenuEntry("Hide All Planets Orbital Paths", 4);
+	glutAddMenuEntry("Show All Rings", 5);
+	glutAddMenuEntry("Hide All Rings", 6);
+
 	int *satellitesSubMenu = new int[NUM_SATELLITES];
 	for (int i = 0; i < NUM_SATELLITES; i++)
 	{
@@ -213,7 +239,7 @@ void display(void) {
 		
 		//Draw the rings
 		for( int i = 0; i < NUM_RINGS; i++ ) {
-			rings[i].drawRing(views[viewId].planetRadiusScale, planets[rings[i].planetId].getCurrentPosition());
+			rings[i].draw(views[viewId].planetRadiusScale, planets[rings[i].planetId].getCurrentPosition());
 		}
 
 		//Draw the satellites
