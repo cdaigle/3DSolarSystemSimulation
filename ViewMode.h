@@ -84,4 +84,9 @@ class ViewMode
 		void decHourIncrement(void);
 
 		int getId(void);
+		
+		string getName(void)
+		{
+			return name;
+		}
 };

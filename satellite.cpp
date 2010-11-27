@@ -72,3 +72,18 @@ bool Satellite :: isEnabled()
 {
 	return enabled;
 }
+
+bool Satellite :: isOrbitEnabled()
+{
+	return orbitEnabled;
+}
+
+void Satellite :: setEnabled(bool value)
+{
+	enabled = value;
+}
+
+void Satellite :: setOrbitEnabled(bool value)
+{
+	orbitEnabled = value;
+}

@@ -43,6 +43,9 @@ class Satellite : public Sphere
 		double getOrbitZ(double);
 		int getPlanetId(void);
 		bool isEnabled(void);
+		bool isOrbitEnabled(void);
+		void setEnabled(bool);
+		void setOrbitEnabled(bool);
 
 	private:
 		int planetId;

@@ -87,3 +87,18 @@ bool Planet :: isEnabled()
 {
 	return enabled;
 }
+
+bool Planet :: isOrbitEnabled()
+{
+	return orbitEnabled;
+}
+
+void Planet :: setEnabled(bool value)
+{
+	enabled = value;
+}
+
+void Planet :: setOrbitEnabled(bool value)
+{
+	orbitEnabled = value;
+}

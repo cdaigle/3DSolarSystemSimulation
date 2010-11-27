@@ -53,4 +53,8 @@ class Sphere
 		{
 			return currentPosition;
 		}
+		string getName(void)
+		{
+			return name;
+		}
 };
