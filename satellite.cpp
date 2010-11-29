@@ -64,11 +64,6 @@ void Satellite :: move(Planet planet)
 	setCurrentPosition(planetPosition.x+getOrbitX(theta), planetPosition.y+getOrbitY(theta), planetPosition.z+getOrbitZ(theta));
 }
 
-int Satellite :: getPlanetId()
-{
-	return planetId;
-}
-
 void Satellite :: toggle()
 {
 	enabled = !enabled;

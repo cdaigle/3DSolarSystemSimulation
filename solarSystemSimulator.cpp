@@ -29,9 +29,7 @@ using namespace std;
 #define NUM_VIEWMODES 7
 
 //Global values
-double static hoursPassedToday = -1.0;
 double static hoursPassed = -1.0;
-int static daysPassed = 0;
 
 bool static simulationRunning = false;
 

@@ -35,6 +35,8 @@ class Satellite : public Sphere
 			planetInclination = planetInclinationIn;
 			planetPosition.set(0.0f, 0.0f, 0.0f);
 		}
+		int planetId;
+
 		void draw(void);
 		void move(Planet);
 		void toggle(void);
@@ -43,14 +45,12 @@ class Satellite : public Sphere
 		double getOrbitX(double);
 		double getOrbitY(double);
 		double getOrbitZ(double);
-		int getPlanetId(void);
 		bool isEnabled(void);
 		bool isOrbitEnabled(void);
 		void setEnabled(bool);
 		void setOrbitEnabled(bool);
 
 	private:
-		int planetId;
 		bool enabled, orbitEnabled;
 		double daysToOrbit, inclination, eccentricity, planetInclination;
 		Point3 planetPosition;

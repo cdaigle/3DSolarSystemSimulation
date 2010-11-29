@@ -207,6 +207,7 @@ void createMenu() {
 void display(void) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	ViewMode view = views[viewId];
 
 	//Draw the x, y, and z axis
 		glColor3f(1.0f, 0.0f, 0.0f);
@@ -227,83 +228,80 @@ void display(void) {
 		glColor3f(1.0f, 1.0f, 1.0f);
 		
 		//Draw the stars
-		for( int i = 0; i < NUM_STARS; i++ ) {
+		for( int i = 0; i < NUM_STARS; i++ )
+		{
 			stars[i].draw();
 		}
 
 		//Draw the planets
-		for( int i = 0; i < NUM_PLANETS; i++ ) {
-			planets[i].draw();
-			planets[i].drawOrbit();
+		for( int i = 0; i < NUM_PLANETS; i++ )
+		{
+			Planet planet = planets[i];
+			planet.draw();
+			planet.drawOrbit();
 		}
 		
 		//Draw the rings
 		for( int i = 0; i < NUM_RINGS; i++ ) {
-			rings[i].draw(views[viewId].planetRadiusScale, planets[rings[i].planetId].getCurrentPosition());
+			Ring ring = rings[i];
+			Planet planet = planets[ring.planetId];
+			if (planet.isEnabled())
+			{
+				ring.draw(view.planetRadiusScale, planet.getCurrentPosition());
+			}
 		}
 
 		//Draw the satellites
-		for( int i = 0; i < NUM_SATELLITES; i++ ) {
-			satellites[i].draw();
-			satellites[i].drawOrbit();
+		for( int i = 0; i < NUM_SATELLITES; i++ )
+		{
+			Satellite sat = satellites[i];
+			Planet planet = planets[sat.planetId];
+			if (planet.isEnabled())
+			{
+				sat.draw();
+				sat.drawOrbit();
+			}
 		}
 
-		cam.setLookAt(getLookAt(views[viewId].getId()));
+		cam.setLookAt(getLookAt(view.getId()));
 
 	glFlush();
 	glutSwapBuffers();
 }
 
 /*********************Simulation Area************************/
-//Allows us to increment the time when simulation is called
-// allows the circular motion of the planets
-void incrementTime()
-{
-	hoursPassedToday += views[viewId].hourIncrement;
-	hoursPassed += views[viewId].hourIncrement;
-	if( hoursPassedToday >= 23.0 ) {
-		daysPassed += 1;
-		hoursPassedToday -= 23.0;
-	}
-}
-
-void changeOrbits()
-{
-	for( int i = 0; i < NUM_PLANETS; i++) {
-		planets[i].move();
-	}
-	for( int i = 0; i < NUM_SATELLITES; i++ ) {
-		satellites[i].move(planets[satellites[i].getPlanetId()]);
-	}
-	incrementTime();
-}
-
 //Actual function called for simulation
-void simulate()
+static void simulate()
 {
-	//Ensure we do not have to move the camera manually
-	if(hoursPassedToday == -1)
-	{
-		cam.slide(0,0,-0.001);
-		changeOrbits(); //Initialize everything
-	}
-
 	//If enabled, move planets and increment the time
-	if( simulationRunning == true )
+	if (simulationRunning == true || hoursPassed == -1)
 	{
-		changeOrbits();
+		if (hoursPassed == -1)
+		{
+			cam.slide(0,0,-0.001);
+		}
+		for( int i = 0; i < NUM_PLANETS; i++)
+		{
+			planets[i].move();
+		}
+		for( int i = 0; i < NUM_SATELLITES; i++ )
+		{
+			satellites[i].move(planets[satellites[i].planetId]);
+		}
+		hoursPassed += views[viewId].hourIncrement; //increment the time
 	}
 	
 	display(); //Call the display function
 }
 
 /**************************Mouse Handling****************************/
-void mouse(int x, int y)
+static void mouse(int x, int y)
 {
 	static int prevX, prevY;
 	int deltaX = x - prevX, deltaY = y - prevY, tol = 3;
 	
-	if( abs(deltaX) > 0.0 && abs(deltaY) < tol ) {
+	if( abs(deltaX) > 0.0 && abs(deltaY) < tol )
+	{
 		cam.swing(deltaX);
 	}
 	
