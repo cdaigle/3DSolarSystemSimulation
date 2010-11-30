@@ -106,3 +106,8 @@ void Planet :: setOrbitEnabled(bool value)
 {
 	orbitEnabled = value;
 }
+
+double Planet :: getRadius()
+{
+	return Sphere :: getRadius(views[viewId].planetRadiusScale);
+}

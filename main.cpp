@@ -208,6 +208,9 @@ void display(void) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	ViewMode view = views[viewId];
+	
+	//glLoadIdentity();
+	cam.setLookAt(getLookAt(view.getId()));
 
 	//Draw the x, y, and z axis
 		glColor3f(1.0f, 0.0f, 0.0f);
@@ -247,7 +250,10 @@ void display(void) {
 			Planet planet = planets[ring.planetId];
 			if (planet.isEnabled())
 			{
-				ring.draw(view.planetRadiusScale, planet.getCurrentPosition());
+				glPushMatrix();
+					glRotated(planet.inclination, 0, 0, 1);
+					ring.draw(view.planetRadiusScale, planet.getCurrentPosition());
+				glPopMatrix();
 			}
 		}
 
@@ -258,12 +264,13 @@ void display(void) {
 			Planet planet = planets[sat.planetId];
 			if (planet.isEnabled())
 			{
-				sat.draw();
-				sat.drawOrbit();
+				glPushMatrix();
+					glRotated(planet.inclination, 0, 0, 1);
+					sat.draw();
+					sat.drawOrbit();
+				glPopMatrix();
 			}
 		}
-
-		cam.setLookAt(getLookAt(view.getId()));
 
 	glFlush();
 	glutSwapBuffers();

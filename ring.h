@@ -10,18 +10,16 @@ class Ring
 		double innerRadius;
 		double outerRadius;
 		double ringRotation;
-		double inclDegree;
 		bool enabled;
 
 	public:
-		Ring(string nameIn, double innerRadiusIn, double outerRadiusIn, string texturePathIn, int planetIn, double rotationIn, double inclinationIn) {
+		Ring(string nameIn, double innerRadiusIn, double outerRadiusIn, string texturePathIn, int planetIn, double rotationIn) {
 			innerRadius = innerRadiusIn;
 			outerRadius = outerRadiusIn;
 			texturePath = texturePathIn;
 			name = nameIn;
 			planetId = planetIn;
 			ringRotation = rotationIn;
-			inclDegree = inclinationIn;
 			enabled = true;
 		}
 		int textureId;

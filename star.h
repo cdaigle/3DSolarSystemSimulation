@@ -8,4 +8,5 @@ class Star : public Sphere {
 			Sphere(nameIn, radiusIn, orbitDistance, albeldoIn, 0.0, texturePathIn) { }
 	public:
 		void draw(void);
+		double getRadius(void);
 };

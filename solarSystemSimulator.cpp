@@ -73,22 +73,24 @@ Planet planets[NUM_PLANETS] =
 Ring rings[NUM_RINGS] =
 {
 	//Saturn's Rings - outer radius smaller than actual outer radius for aesthetic reasons
-	Ring("SaturnRing", 67000.0, 139380.0, "saturnringcolor.bmp", 5, planets[5].tiltDegree, planets[5].inclination),	
+	Ring("SaturnRing", 67000.0, 139380.0, "saturnringcolor.bmp", 5, planets[5].tiltDegree),	
 	//Uranus' Rings
-	Ring("UranusRing", 41837.0, 51149.0, "uranusringcolor.bmp", 6, planets[6].tiltDegree, planets[6].inclination)
+	Ring("UranusRing", 41837.0, 51149.0, "uranusringcolor.bmp", 6, planets[6].tiltDegree)
 };
 
 Satellite satellites[NUM_SATELLITES] =
 {
-	Satellite("Moon", 3476.0, 384400.0, 0.1, 27.32, 5.14, 0.05, "moonmap.bmp", 2, planets[2].inclination),        //Earth's Moon
-	Satellite("Phobos", 2222.2, 9378.0, 0.1, 0.32, 1.00, 0.02, "phobosmap.bmp", 3, planets[3].inclination),       //Mar's Satellite     (one of them)
-	Satellite("Europa", 3569.0, 999999999999999999999.0, 0.1, 3.55, 0.47, 0.01, "europamap.bmp", 4, planets[4].inclination)  //Jupiter's Satellite (one of them)
+	Satellite("Moon", 3476.0, 384400.0, 0.1, 27.32, 5.14, 0.05, "moonmap.bmp", 2),                   //Earth's Moon
+	Satellite("Phobos", 2222.2, 9378.0, 0.1, 0.32, 1.00, 0.02, "phobosmap.bmp", 3),                  //Mar's Satellite     (one of them)
+	Satellite("Europa", 3569.0, 999999999999999999999.0, 0.1, 3.55, 0.47, 0.01, "europamap.bmp", 4)  //Jupiter's Satellite (one of them)
 };
+
+double outerRadiusBound = (planets[NUM_PLANETS-1].orbitDistance*views[viewId].planetOrbitScale + 75) / views[viewId].starRadiusScale;
 
 Star stars[NUM_STARS] =
 {
-	Star("Stars", 125/views[viewId].starRadiusScale, 0.0, 1.0, "stars.bmp"),  //Stars
-	Star("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp")                             //Sun
+	Star("Stars", outerRadiusBound, 0.0, 1.0, "stars.bmp"),  //Stars
+	Star("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp")            //Sun
 };
 
 RGBpixmap starPixmaps[NUM_STARS];

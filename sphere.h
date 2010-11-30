@@ -56,4 +56,8 @@ class Sphere
 		{
 			return name;
 		}
+		double getRadius(double scale)
+		{
+			return radius * scale;
+		}
 };

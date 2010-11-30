@@ -49,6 +49,7 @@ class Planet : public Sphere
 		bool isOrbitEnabled(void);
 		void setEnabled(bool);
 		void setOrbitEnabled(bool);
+		double getRadius(void);
 
 	private:
 		bool enabled, orbitEnabled;

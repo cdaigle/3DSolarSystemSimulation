@@ -172,6 +172,13 @@ void keyboard(unsigned char key, int x, int y)
 			printf("Changing view: NeptuneView\n");
 			cam.setView(views[viewId].initCameraDistance);
 			break;
+		
+		case 'l':
+			glEnable(GL_LIGHTING);
+			break;
+		case 'L':
+			glDisable(GL_LIGHTING);
+			break;
 	}
 	glutPostRedisplay();
 }
