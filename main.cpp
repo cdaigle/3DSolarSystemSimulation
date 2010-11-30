@@ -300,11 +300,30 @@ static void mouse(int x, int y)
 	static int prevX, prevY;
 	int deltaX = x - prevX, deltaY = y - prevY, tol = 3;
 	
-	if( abs(deltaX) > 0.0 && abs(deltaY) < tol )
+	if (abs(deltaX) > 0.0 && abs(deltaY) < tol)
 	{
-		cam.swing(deltaX);
+		if (deltaX < 0)
+		{
+			cam.swing(-0.5);
+		}
+		else
+		{
+			cam.swing(0.5);
+		}
 	}
-	
+	/*
+	if (abs(deltaY) > 0.0 && abs(deltaX < tol))
+	{
+		if (deltaY < 0)
+		{
+			cam.move(-0.5);
+		}
+		else
+		{
+			cam.move(0.5);
+		}
+	}
+	*/
 	glutPostRedisplay();
 	prevX = x;
 	prevY = y;

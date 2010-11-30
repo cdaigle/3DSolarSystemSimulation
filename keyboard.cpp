@@ -7,6 +7,12 @@ void keyboard(unsigned char key, int x, int y)
 	switch(key)
 	{	
 	// slide controls for camera
+		case 'w':
+			cam.move(0.5);
+			break;
+		case 's':
+			cam.move(-0.5);
+			break;
 		case 'a':
 			cam.swing(0.5);
 			break;  // slide camera left

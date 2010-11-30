@@ -10,6 +10,8 @@ Camera::Camera(double cameraDistance)
 	u.set(0.0, 0.0, 1.0);
 	v.set(0.0, 1.0, 0.0);
 	n.set(-1.0, 0.0, 0.0);
+	lookAt.set(0.0,0.0,0.0);
+	lookAtOld.set(0.0,0.0,0.0);
 	orbitDegree = 180.0;
 	distance = cameraDistance;
 }
@@ -38,9 +40,12 @@ void Camera:: set(Point3 Eye, Point3 look, Vector3 up)     // create a modelview
 
 void Camera :: setLookAt(Point3 lookAtIn)
 {
+	lookAtOld = lookAt;
 	lookAt = lookAtIn;
+	Point3 change(lookAt.x - lookAtOld.x, lookAt.y - lookAtOld.y, lookAt.z - lookAtOld.z);
+	Point3 Eye(eye.x+change.x, eye.y+change.y, eye.z+change.z);
 	Vector3 Up(0.0f, 1.0f, 0.0f);
-	set(eye, lookAt, Up);
+	set(Eye, lookAt, Up);
 }
 
 void Camera :: setView(double initCameraDistance)
@@ -109,7 +114,7 @@ void Camera :: swing(double value)
 	{
 		orbitDegree += 360.0;
 	}
-	Point3 Eye(cos(orbitDegree*DEG2RAD)*distance, eye.y, sin(orbitDegree*DEG2RAD)*distance);
+	Point3 Eye(cos(orbitDegree*DEG2RAD)*distance+lookAt.x, eye.y+lookAt.y, sin(orbitDegree*DEG2RAD)*distance+lookAt.z);
 	Point3 Look = lookAt;
 	Vector3 Up(0.0, 1.0, 0.0);
 	set(Eye, Look, Up);
@@ -122,6 +127,14 @@ void Camera :: zoom(double value)
 		distance = 0.0;
 	}
 	slide(0.0, 0.0, value);
+}
+
+void Camera :: move(double value)
+{
+	Point3 Eye(eye.x, eye.y+value, eye.z);
+	Point3 Look = lookAt;
+	Vector3 Up(0.0, 1.0, 0.0);
+	set(Eye, Look, Up);
 }
 
 Point3 Camera :: getEyePos() {
