@@ -334,13 +334,21 @@ void mouseWheel(int wheel, int direction, int x, int y) {
 	glutPostRedisplay();
 }
 
+/****************************Resize*********************************/
+static void reshape(int width, int height)
+{
+	winWidth = width;
+	winHeight = height;
+	setupCamera();
+}
+
 /******************************Main********************************/
 int main(int argc, char * argv[])
 {
 	// initialize GLUT
 	glutInit( &argc, argv );		
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
+	glutInitWindowSize(winWidth, winHeight);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("3D Solar System Simulation");
 
@@ -349,6 +357,7 @@ int main(int argc, char * argv[])
 	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(display);
 	glutIdleFunc(simulate);
+	glutReshapeFunc(reshape);
 	
 	createMenu();
 	

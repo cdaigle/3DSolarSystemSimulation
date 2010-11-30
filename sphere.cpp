@@ -29,13 +29,12 @@ void Sphere :: position()
 
 void Sphere :: rotate()
 {
-	glRotated (orbitDegree, rotationalAxis.x, rotationalAxis.y, rotationalAxis.z);
+	glRotated(orbitDegree, rotationalAxis.x, rotationalAxis.y, rotationalAxis.z);
 }
 
 void Sphere :: create(double radiusScale)
 {
 	applyTexture();
-	applyLighting();
 	applyMaterial();
 	GLUquadricObj *quadratic = NULL;
 	quadratic = gluNewQuadric();                // Create A Pointer To The Quadric Object
@@ -45,11 +44,6 @@ void Sphere :: create(double radiusScale)
 	glRotated (tiltDegree, 1, 0, 0);
 	glRotated (270, 1, 0, 0);
 	gluSphere(quadratic, radius*radiusScale, 40, 40);
-}
-
-void Sphere :: applyLighting()
-{
-	
 }
 
 void Sphere :: applyMaterial()

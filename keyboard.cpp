@@ -61,10 +61,10 @@ void keyboard(unsigned char key, int x, int y)
 			satellites[0].toggle();
 			break;
 		case '$':
-			//satellites[1].toggle();
+			satellites[1].toggle();
 			break;
 		case '%':
-			//satellites[2].toggle();
+			satellites[2].toggle();
 			break;
 		case '^':
 			//satellites[3].toggle();

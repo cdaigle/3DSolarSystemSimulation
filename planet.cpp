@@ -32,12 +32,16 @@ double Planet :: getSemiMinorAxis()
 //Calculates the new position of the planet, based on the circularTime
 void Planet :: move()
 {
-	double theta = ((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
+	double theta = -((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
 	setCurrentPosition(getOrbitX(theta),getOrbitY(),getOrbitZ(theta));
-	orbitDegree -= 1.0; //(hoursPassedToday / 24.0) / 360.0;
+	orbitDegree -= ((hoursPassed / 24) / daysToRotate)*DEG2RAD;
 	if (orbitDegree < -360.0)
 	{
 		orbitDegree += 360.0;
+	}
+	else if (orbitDegree > 0.0)
+	{
+		orbitDegree -= 360.0;
 	}
 }
 
@@ -77,7 +81,7 @@ void Planet :: toggle()
 	enabled = !enabled;
 }
 
-//Toggles whether or not to draw the orbit.  Triggered by 'o'.  Note: Planet must be enabled as well
+//Toggles whether or not to draw the orbit.  Triggered by '0'.  Note: Planet must be enabled as well
 void Planet :: toggleOrbit()
 {
 	orbitEnabled = !orbitEnabled;
