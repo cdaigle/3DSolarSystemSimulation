@@ -81,8 +81,3 @@ void ViewMode :: decHourIncrement(void)
 		hourIncrement = 0.0;
 	}
 }
-
-int ViewMode :: getId(void)
-{
-	return orbitBodyId;
-}

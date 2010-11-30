@@ -34,12 +34,12 @@ void Planet :: move()
 {
 	double theta = -((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
 	setCurrentPosition(getOrbitX(theta),getOrbitY(),getOrbitZ(theta));
-	orbitDegree -= ((hoursPassed / 24) / daysToRotate)*DEG2RAD;
-	if (orbitDegree < -360.0)
-	{
-		orbitDegree += 360.0;
-	}
-	else if (orbitDegree > 0.0)
+}
+
+void Planet :: rotate()
+{
+	orbitDegree += ((views[viewId].hourIncrement / 24) / daysToRotate)*DEG2RAD*360;
+	if (orbitDegree > 360.0)
 	{
 		orbitDegree -= 360.0;
 	}
@@ -110,4 +110,9 @@ void Planet :: setOrbitEnabled(bool value)
 double Planet :: getRadius()
 {
 	return Sphere :: getRadius(views[viewId].planetRadiusScale);
+}
+
+double Planet :: getOrbitDistance()
+{
+	return orbitDistance * views[viewId].planetOrbitScale;
 }

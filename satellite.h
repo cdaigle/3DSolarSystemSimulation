@@ -36,7 +36,7 @@ class Satellite : public Sphere
 		int planetId;
 
 		void draw(void);
-		void move(Planet);
+		void move(Point3);
 		void toggle(void);
 		void toggleOrbit(void);
 		void drawOrbit(void);
@@ -48,6 +48,7 @@ class Satellite : public Sphere
 		void setEnabled(bool);
 		void setOrbitEnabled(bool);
 		double getRadius(void);
+		double getOrbitDistance(void);
 
 	private:
 		bool enabled, orbitEnabled;

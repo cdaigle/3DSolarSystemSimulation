@@ -210,7 +210,7 @@ void display(void) {
 	ViewMode view = views[viewId];
 	
 	//glLoadIdentity();
-	cam.setLookAt(getLookAt(view.getId()));
+	cam.setLookAt(getLookAt(view.lookAtId));
 
 	//Draw the x, y, and z axis
 		glColor3f(1.0f, 0.0f, 0.0f);
@@ -290,10 +290,11 @@ static void simulate()
 		for( int i = 0; i < NUM_PLANETS; i++)
 		{
 			planets[i].move();
+			planets[i].rotate();
 		}
 		for( int i = 0; i < NUM_SATELLITES; i++ )
 		{
-			satellites[i].move(planets[satellites[i].planetId]);
+			satellites[i].move(planets[satellites[i].planetId].getCurrentPosition());
 		}
 		hoursPassed += views[viewId].hourIncrement; //increment the time
 	}
@@ -309,14 +310,7 @@ static void mouse(int x, int y)
 	
 	if (abs(deltaX) > 0.0 && abs(deltaY) < tol)
 	{
-		if (deltaX < 0)
-		{
-			cam.swing(-0.5);
-		}
-		else
-		{
-			cam.swing(0.5);
-		}
+		cam.swing(deltaX);
 	}
 	/*
 	if (abs(deltaY) > 0.0 && abs(deltaX < tol))
@@ -363,6 +357,7 @@ int main(int argc, char * argv[])
 	glutMotionFunc(mouse);
 	glutKeyboardFunc(keyboard);
 	glutDisplayFunc(display);
+	glutSpecialFunc(keyboardSpecial);
 	glutIdleFunc(simulate);
 	glutReshapeFunc(reshape);
 	

@@ -51,10 +51,10 @@ void Satellite :: drawOrbit()
 	}
 }
 
-void Satellite :: move(Planet planet)
+void Satellite :: move(Point3 planetPositionIn)
 {
 	double theta = ((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
-	planetPosition = planet.getCurrentPosition();
+	planetPosition = planetPositionIn;
 	setCurrentPosition(planetPosition.x+getOrbitX(theta), planetPosition.y+getOrbitY(theta), planetPosition.z+getOrbitZ(theta));
 }
 
@@ -91,4 +91,9 @@ void Satellite :: setOrbitEnabled(bool value)
 double Satellite :: getRadius()
 {
 	return Sphere :: getRadius(views[viewId].satelliteRadiusScale);
+}
+
+double Satellite :: getOrbitDistance()
+{
+	return orbitDistance * views[viewId].satelliteOrbitScale;
 }

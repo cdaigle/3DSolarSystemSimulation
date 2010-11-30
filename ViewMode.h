@@ -21,7 +21,7 @@ class ViewMode
 		
 		double initCameraDistance;
 
-		int orbitBodyId;
+		int lookAtId;
 		Point3 initEyePos;
 		Point3 initLookPos;
 
@@ -61,7 +61,7 @@ class ViewMode
 			
 			initCameraDistance = cD;
 
-			orbitBodyId = oBI;
+			lookAtId = oBI;
 			initEyePos.set(-10.0f, 1.2f, 0.0f);
 			initLookPos.set(0.0f, 0.0f, 0.0f);
 		}
@@ -82,8 +82,6 @@ class ViewMode
 
 		void incHourIncrement(void);
 		void decHourIncrement(void);
-
-		int getId(void);
 		
 		string getName(void)
 		{

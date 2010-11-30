@@ -1,12 +1,11 @@
 /**
  * keyboard : Handles all keyboard actions recieved from OpenGL callbacks
  */
-
-void keyboard(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
 	switch(key)
-	{	
-	// slide controls for camera
+	{
+		//Camera controls
 		case 'w':
 			cam.move(0.5);
 			break;
@@ -15,10 +14,10 @@ void keyboard(unsigned char key, int x, int y)
 			break;
 		case 'a':
 			cam.swing(0.5);
-			break;  // slide camera left
+			break;
 		case 'd':
 			cam.swing(-0.5);
-			break;   // slide camera right
+			break;
 		case '+':
 			cam.zoom(-0.5);
 			break;
@@ -31,7 +30,8 @@ void keyboard(unsigned char key, int x, int y)
 			simulationRunning = !simulationRunning;
 			break;
 		
-		//Toggle planets (whether they are visible or not)
+		//Set place to look at.  1-9 are the planets, !-( are the satellites, 0 is the sun.
+		case '0':
 		case '1': 
 		case '2': 
 		case '3': 
@@ -41,44 +41,52 @@ void keyboard(unsigned char key, int x, int y)
 		case '7': 
 		case '8': 
 		case '9': 
-			planets[key-49].toggle();
+			if (key == 0)
+			{
+				views[viewId].lookAtId = -1;
+			}
+			else
+			{
+				views[viewId].lookAtId = key-49;
+			}
 			break;
 		
-		case '0': 
+		case '!':
+			//No Satellite
+			break;
+		case '@':
+			//No Satellite
+			break;
+		case '#':
+			views[viewId].lookAtId = NUM_PLANETS;
+			break;
+		case '$':
+			views[viewId].lookAtId = NUM_PLANETS+1;
+			break;
+		case '%':
+			views[viewId].lookAtId = NUM_PLANETS+2;
+			break;
+		case '^':
+			//No Satellite
+			break;
+		case '&':
+			//No Satellite
+			break;
+		case '*':
+			//No Satellite
+			break;
+		case '(':
+			//No Satellite
+			break;
+		
+		//Toggle orbital paths
+		case '`': 
 			for( int i = 0; i < NUM_PLANETS; i++ )
 			{
 				planets[i].toggleOrbit();
 			}
 			break;
-		
-		case '!':
-			//satellites[0].toggle();
-			break;
-		case '@':
-			//satellites[1].toggle();
-			break;
-		case '#':
-			satellites[0].toggle();
-			break;
-		case '$':
-			satellites[1].toggle();
-			break;
-		case '%':
-			satellites[2].toggle();
-			break;
-		case '^':
-			//satellites[3].toggle();
-			break;
-		case '&':
-			//satellites[4].toggle();
-			break;
-		case '*':
-			//satellites[5].toggle();
-			break;
-		case '(':
-			//satellites[6].toggle();
-			break;
-		case ')':
+		case '~':
 			for( int i = 0; i < NUM_SATELLITES; i++ )
 			{
 				satellites[i].toggleOrbit();
@@ -136,42 +144,6 @@ void keyboard(unsigned char key, int x, int y)
 		case 27: //Esc key - exit
 			exit(0);
 			break;
-	
-		case 'z':
-			viewId = 0;
-			printf("Changing view: SolarSystemView\n");
-			cam.setView(views[viewId].initCameraDistance);
-			break;
-		case 'x':
-			viewId = 1;
-			printf("Changing view: EarthView\n");
-			cam.setView(views[viewId].initCameraDistance);
-			break;
-		case 'c':
-			viewId = 2;
-			printf("Changing view: MarsView\n");
-			cam.setView(views[viewId].initCameraDistance);
-			break;
-		case 'v':
-			viewId = 3;
-			printf("Changing view: JupiterView\n");
-			cam.setView(views[viewId].initCameraDistance);
-			break;
-		case 'b':
-			viewId = 4;
-			printf("Changing view: SaturnView\n");
-			cam.setView(views[viewId].initCameraDistance);
-			break;
-		case 'n':
-			viewId = 5;
-			printf("Changing view: UranusView\n");
-			cam.setView(views[viewId].initCameraDistance);
-			break;
-		case 'm':
-			viewId = 6;
-			printf("Changing view: NeptuneView\n");
-			cam.setView(views[viewId].initCameraDistance);
-			break;
 		
 		case 'l':
 			glEnable(GL_LIGHTING);
@@ -179,6 +151,49 @@ void keyboard(unsigned char key, int x, int y)
 		case 'L':
 			glDisable(GL_LIGHTING);
 			break;
+		case 'k':
+			glEnable(GL_LIGHT0);
+			break;
+		case 'K':
+			glDisable(GL_LIGHT0);
+			break;
+		case 'j':
+			glEnable(GL_NORMALIZE);
+			break;
+		case 'J':
+			glDisable(GL_NORMALIZE);
+			break;
 	}
 	glutPostRedisplay();
+}
+
+static void keyboardSpecial(int key, int x, int y)
+{
+	switch(key)
+	{
+		case GLUT_KEY_F1:
+			viewId = 0;
+			cam.setView(views[viewId].initCameraDistance);
+			break;
+		case GLUT_KEY_F2:
+			viewId = 1;
+			cam.setView(views[viewId].initCameraDistance);
+			break;
+		case GLUT_KEY_F3:
+			viewId = 2;
+			cam.setView(views[viewId].initCameraDistance);
+			break;
+		case GLUT_KEY_LEFT:
+			keyboard('a', 0, 0);
+			break;			
+		case GLUT_KEY_RIGHT:
+			keyboard('d', 0, 0);
+			break;			
+		case GLUT_KEY_DOWN:
+			keyboard('s', 0, 0);
+			break;
+		case GLUT_KEY_UP:
+			keyboard('w', 0, 0);
+			break;
+	}
 }

@@ -36,6 +36,7 @@ class Planet : public Sphere
 		double inclination;
 
 		void move(void);
+		void rotate(void);
 		void toggle(void);
 		void toggleOrbit(void);
 		void draw(void);
@@ -50,6 +51,7 @@ class Planet : public Sphere
 		void setEnabled(bool);
 		void setOrbitEnabled(bool);
 		double getRadius(void);
+		double getOrbitDistance(void);
 
 	private:
 		bool enabled, orbitEnabled;
