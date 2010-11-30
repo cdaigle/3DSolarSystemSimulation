@@ -51,18 +51,17 @@ void setupTextures(void) {
 	}
 }
 
-void setupCamera(void) {
+void setupCameras(void) {
 	//Set up the viewport and initial camera
 	glViewport(0, 0, winWidth, winHeight);
-	Point3 eye = views[viewId].initEyePos;
-	Point3 look = views[viewId].initLookPos;
-	Vector3 up(0.0, 1.0, 0.0);
-	cam.set(eye, look, up);
-	cam.setShape(30.0f, winWidth/(double)winHeight, 0.01f, 2*outerRadiusBound);
+	for (int i = 0; i < NUM_VIEWMODES; i++)
+	{
+		views[i].setupCam();
+	}
 }
 
 void init(void) {
 	setupLighting();
 	setupTextures();
-	setupCamera();
+	setupCameras();
 }

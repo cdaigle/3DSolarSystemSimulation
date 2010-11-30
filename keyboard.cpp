@@ -7,22 +7,22 @@ static void keyboard(unsigned char key, int x, int y)
 	{
 		//Camera controls
 		case 'w':
-			cam.move(0.5);
+			views[viewId].cam.move(0.5);
 			break;
 		case 's':
-			cam.move(-0.5);
+			views[viewId].cam.move(-0.5);
 			break;
 		case 'a':
-			cam.swing(0.5);
+			views[viewId].cam.swing(0.5);
 			break;
 		case 'd':
-			cam.swing(-0.5);
+			views[viewId].cam.swing(-0.5);
 			break;
 		case '+':
-			cam.zoom(-0.5);
+			views[viewId].cam.zoom(-0.5);
 			break;
 		case '-':
-			cam.zoom(0.5);
+			views[viewId].cam.zoom(0.5);
 			break;
 		
 		//Turn simulation on/off
@@ -47,7 +47,10 @@ static void keyboard(unsigned char key, int x, int y)
 			}
 			else
 			{
-				views[viewId].lookAtId = key-49;
+				if (planets[key-49].isEnabled())
+				{
+					views[viewId].lookAtId = key-49;
+				}
 			}
 			break;
 		
@@ -58,13 +61,22 @@ static void keyboard(unsigned char key, int x, int y)
 			//No Satellite
 			break;
 		case '#':
-			views[viewId].lookAtId = NUM_PLANETS;
+			if (satellites[0].isEnabled())
+			{
+				views[viewId].lookAtId = NUM_PLANETS;
+			}
 			break;
 		case '$':
-			views[viewId].lookAtId = NUM_PLANETS+1;
+			if (satellites[1].isEnabled())
+			{
+				views[viewId].lookAtId = NUM_PLANETS+1;
+			}
 			break;
 		case '%':
-			views[viewId].lookAtId = NUM_PLANETS+2;
+			if (satellites[2].isEnabled())
+			{
+				views[viewId].lookAtId = NUM_PLANETS+2;
+			}
 			break;
 		case '^':
 			//No Satellite
@@ -137,8 +149,8 @@ static void keyboard(unsigned char key, int x, int y)
 			printf("satelliteRadiusScale: %e\n", views[viewId].satelliteRadiusScale);
 			printf("orbitScale: %e\n", views[viewId].planetOrbitScale);
 			printf("satelliteOrbitScale: %e\n", views[viewId].satelliteOrbitScale);
-			printf("cameraDistance: %f\n", cam.distance);
-			printf("eyePosition: %f, %f, %f\n", cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z );
+			printf("cameraDistance: %f\n", views[viewId].cam.distance);
+			printf("eyePosition: %f, %f, %f\n", views[viewId].cam.getEyePos().x, views[viewId].cam.getEyePos().y, views[viewId].cam.getEyePos().z );
 			break;
 		
 		case 27: //Esc key - exit
@@ -173,15 +185,15 @@ static void keyboardSpecial(int key, int x, int y)
 	{
 		case GLUT_KEY_F1:
 			viewId = 0;
-			cam.setView(views[viewId].initCameraDistance);
+			//views[viewId].set();
 			break;
 		case GLUT_KEY_F2:
 			viewId = 1;
-			cam.setView(views[viewId].initCameraDistance);
+			//views[viewId].set();
 			break;
 		case GLUT_KEY_F3:
 			viewId = 2;
-			cam.setView(views[viewId].initCameraDistance);
+			//views[viewId].set();
 			break;
 		case GLUT_KEY_LEFT:
 			keyboard('a', 0, 0);

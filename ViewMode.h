@@ -24,6 +24,7 @@ class ViewMode
 		int lookAtId;
 		Point3 initEyePos;
 		Point3 initLookPos;
+		Camera cam;
 
 		ViewMode(
 			string nameIn, 
@@ -64,6 +65,7 @@ class ViewMode
 			lookAtId = oBI;
 			initEyePos.set(-10.0f, 1.2f, 0.0f);
 			initLookPos.set(0.0f, 0.0f, 0.0f);
+			cam.init(initCameraDistance);
 		}
 		void incPlanetRadiusScale(void);
 		void decPlanetRadiusScale(void);
@@ -82,6 +84,8 @@ class ViewMode
 
 		void incHourIncrement(void);
 		void decHourIncrement(void);
+		
+		void setupCam(void);
 		
 		string getName(void)
 		{

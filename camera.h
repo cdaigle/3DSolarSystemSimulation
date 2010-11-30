@@ -6,13 +6,11 @@ class Camera {
 		void setModelViewMatrix(); // tell OpenGL where the camera is
 
 	public:
-		Camera(double);                                             // default constructor
+		Camera() {}
+		void init(double);
 		double orbitDegree, distance;
-		void set(Point3 eye, Point3 look, Vector3 up);              // like gluLookAt()
-		void roll(GLdouble angle);                                  // roll it
-		void yaw(GLdouble angle);                                   // yaw it
-		void pitch(GLdouble angle);                                 // pitch it
-		void slide(GLdouble delU, GLdouble delV, GLdouble delN);    // slide it
+		void set(Point3 eye, Point3 look, Vector3 up);
+		void slide(GLdouble delU, GLdouble delV, GLdouble delN);
 		void setShape(GLdouble vAng, GLdouble asp, GLdouble nearD, GLdouble farD);
 		void swing(double);
 		void zoom(double);

@@ -1,6 +1,6 @@
 #include "camera.h"
 
-Camera::Camera(double cameraDistance)
+void Camera :: init(double cameraDistance)
 {
 	viewAngle = 0.0;
 	aspect = 1.0;
@@ -48,12 +48,6 @@ void Camera :: setLookAt(Point3 lookAtIn)
 	set(Eye, lookAt, Up);
 }
 
-void Camera :: setView(double initCameraDistance)
-{
-	orbitDegree = 0.0;
-	distance = initCameraDistance;
-}
-
 void Camera:: setShape(GLdouble vAng, GLdouble asp, GLdouble nearD, GLdouble farD) // define shape of view volume
 {
 	viewAngle = vAng;
@@ -71,36 +65,6 @@ void Camera:: slide(GLdouble delU, GLdouble delV, GLdouble delN) // slide the ca
 	eye.y += delU * u.y + delV * v.y + delN * n.y;
 	eye.z += delU * u.z + delV * v.z + delN * n.z;
 	setModelViewMatrix(); // tell OpenGL 
-}
-
-void Camera:: roll(GLdouble angle) //roll the camera through angle degrees
-{
-	GLdouble cs = cos(3.14159265 /180 * angle);
-	GLdouble sn = sin(3.14159265 /180 * angle);
-	Vector3 t(u); //remember old u
-	u.set(cs*t.x - sn*v.x, cs*t.y - sn*v.y, cs*t.z - sn*v.z);
-	v.set(sn*t.x + cs*v.x, sn*t.y + cs*v.y, sn*t.z + cs*v.z);
-	setModelViewMatrix();	
-}
-
-void Camera:: yaw(GLdouble angle) //yaw the camera through angle degrees
-{
-	GLdouble cs = cos(3.14159265 /180 * angle);
-	GLdouble sn = sin(3.14159265 /180 * angle);
-	Vector3 t(n); //remember old u
-	n.set(cs*t.x + sn*u.x, cs*t.y + sn*u.y, cs*t.z + sn*u.z);
-	u.set(-sn*t.x + cs*u.x, -sn*t.y + cs*u.y, -sn*t.z + cs*u.z);
-	setModelViewMatrix();	
-}
-
-void Camera:: pitch(GLdouble angle) //pitch the camera through angle degrees
-{
-	GLdouble cs = cos(3.14159265 /180 * angle);
-	GLdouble sn = sin(3.14159265 /180 * angle);
-	Vector3 t(v); //remember old u
-	v.set(cs*t.x + sn*n.x, cs*t.y + sn*n.y, cs*t.z + sn*n.z);
-	n.set(-sn*t.x + cs*n.x, -sn*t.y + cs*n.y, -sn*t.z + cs*n.z);
-	setModelViewMatrix();	
 }
 
 void Camera :: swing(double value)
@@ -123,8 +87,8 @@ void Camera :: swing(double value)
 void Camera :: zoom(double value)
 {
 	distance += value;
-	if( distance < 0.0 ) {
-		distance = 0.0;
+	if( distance <= 0.0 ) {
+		distance = 0.001;
 	}
 	slide(0.0, 0.0, value);
 }

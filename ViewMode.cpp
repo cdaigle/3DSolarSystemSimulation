@@ -81,3 +81,10 @@ void ViewMode :: decHourIncrement(void)
 		hourIncrement = 0.0;
 	}
 }
+
+void ViewMode :: setupCam()
+{
+	Vector3 up(0.0, 1.0, 0.0);
+	cam.set(initEyePos, initLookPos, up);
+	cam.setShape(30.0f, winWidth/(double)winHeight, 0.01f, 2*225);
+}

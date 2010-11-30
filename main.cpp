@@ -7,7 +7,6 @@
 static void ViewModeMenu (int value)
 {
 	viewId = value;
-	cam.setView(views[viewId].initCameraDistance);
 }
 
 static void PlanetMenu (int value)
@@ -210,7 +209,7 @@ void display(void) {
 	ViewMode view = views[viewId];
 	
 	//glLoadIdentity();
-	cam.setLookAt(getLookAt(view.lookAtId));
+	view.cam.setLookAt(getLookAt(view.lookAtId));
 
 	//Draw the x, y, and z axis
 		glColor3f(1.0f, 0.0f, 0.0f);
@@ -285,7 +284,7 @@ static void simulate()
 	{
 		if (hoursPassed == -1)
 		{
-			cam.slide(0,0,-0.001);
+			views[viewId].cam.slide(0,0,-0.001);
 		}
 		for( int i = 0; i < NUM_PLANETS; i++)
 		{
@@ -310,7 +309,7 @@ static void mouse(int x, int y)
 	
 	if (abs(deltaX) > 0.0 && abs(deltaY) < tol)
 	{
-		cam.swing(deltaX);
+		views[viewId].cam.swing(deltaX);
 	}
 	/*
 	if (abs(deltaY) > 0.0 && abs(deltaX < tol))
@@ -331,7 +330,7 @@ static void mouse(int x, int y)
 }
 
 void mouseWheel(int wheel, int direction, int x, int y) {
-	cam.zoom(-direction/2.0);
+	views[viewId].cam.zoom(-direction/2.0);
 	glutPostRedisplay();
 }
 
@@ -340,7 +339,7 @@ static void reshape(int width, int height)
 {
 	winWidth = width;
 	winHeight = height;
-	setupCamera();
+	setupCameras();
 }
 
 /******************************Main********************************/
