@@ -16,6 +16,7 @@ class Planet : public Sphere
 			double eccentricityIn, 
 			double tiltIn,
 			double daysToRotateIn,
+			double initOrbitDegreeIn,
 			string texturePathIn
 		) : Sphere (
 			nameIn, 
@@ -32,8 +33,9 @@ class Planet : public Sphere
 			inclination = inclinationIn;
 			eccentricity = eccentricityIn;
 			daysToRotate = daysToRotateIn;
+			initOrbitDegree = initOrbitDegreeIn;
 		}
-		double inclination;
+		double inclination, initOrbitDegree;
 
 		void move(void);
 		void rotate(void);

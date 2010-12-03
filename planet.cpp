@@ -32,7 +32,13 @@ double Planet :: getSemiMinorAxis()
 //Calculates the new position of the planet, based on the circularTime
 void Planet :: move()
 {
-	double theta = -((hoursPassed / 24) / daysToOrbit)*DEG2RAD;
+	double theta = (((hoursPassed / 24) / daysToOrbit)+initOrbitDegree);
+	if (theta > 360.0)
+	{
+		theta -= 360.0;
+	}
+	theta = -theta*DEG2RAD;
+	
 	setCurrentPosition(getOrbitX(theta),getOrbitY(),getOrbitZ(theta));
 }
 

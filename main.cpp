@@ -210,6 +210,8 @@ void display(void) {
 	
 		view.cam.setLookAt(getLookAt(view.lookAtId));
 		
+		stars[0].setRadius(500 / view.starRadiusScale);
+		
 		//Draw the stars
 		for( int i = 0; i < NUM_STARS; i++ )
 		{
