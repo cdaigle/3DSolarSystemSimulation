@@ -43,6 +43,8 @@ class Satellite : public Sphere
 		double getOrbitX(double);
 		double getOrbitY(double);
 		double getOrbitZ(double);
+		double getSemiMajorAxis(void);
+		double getSemiMinorAxis(void);
 		bool isEnabled(void);
 		bool isOrbitEnabled(void);
 		void setEnabled(bool);

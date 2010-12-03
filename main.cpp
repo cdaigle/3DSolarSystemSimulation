@@ -206,28 +206,9 @@ void createMenu() {
 void display(void) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	ViewMode view = views[viewId];
+		ViewMode view = views[viewId];
 	
-	//glLoadIdentity();
-	view.cam.setLookAt(getLookAt(view.lookAtId));
-
-	//Draw the x, y, and z axis
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glBegin(GL_LINES);
-			glVertex3f(-200.0,0.0,0.0);
-			glVertex3f(200.0,0.0,0.0);
-		glEnd();
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glBegin(GL_LINE);
-			glVertex3f(0.0,-200.0,0.0);
-			glVertex3f(0.0,200.0,0.0);
-		glEnd();
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glBegin(GL_LINE);
-			glVertex3f(0.0,0.0,-200.0);
-			glVertex3f(0.0,0.0,200.0);
-		glEnd();
-		glColor3f(1.0f, 1.0f, 1.0f);
+		view.cam.setLookAt(getLookAt(view.lookAtId));
 		
 		//Draw the stars
 		for( int i = 0; i < NUM_STARS; i++ )
@@ -279,12 +260,14 @@ void display(void) {
 //Actual function called for simulation
 static void simulate()
 {
+	static bool init = true;
 	//If enabled, move planets and increment the time
-	if (simulationRunning == true || hoursPassed == -1)
+	if (simulationRunning == true || init == true)
 	{
-		if (hoursPassed == -1)
+		if (init == true)
 		{
 			views[viewId].cam.slide(0,0,-0.001);
+			init = false;
 		}
 		for( int i = 0; i < NUM_PLANETS; i++)
 		{
@@ -309,28 +292,22 @@ static void mouse(int x, int y)
 	
 	if (abs(deltaX) > 0.0 && abs(deltaY) < tol)
 	{
-		views[viewId].cam.swing(deltaX);
-	}
-	/*
-	if (abs(deltaY) > 0.0 && abs(deltaX < tol))
-	{
-		if (deltaY < 0)
+		if (deltaX < 0)
 		{
-			cam.move(-0.5);
+			views[viewId].cam.swing(-views[viewId].camIncrement);
 		}
 		else
 		{
-			cam.move(0.5);
+			views[viewId].cam.swing(views[viewId].camIncrement);
 		}
 	}
-	*/
 	glutPostRedisplay();
 	prevX = x;
 	prevY = y;
 }
 
 void mouseWheel(int wheel, int direction, int x, int y) {
-	views[viewId].cam.zoom(-direction/2.0);
+	views[viewId].cam.zoom(-direction * views[viewId].camIncrement);
 	glutPostRedisplay();
 }
 

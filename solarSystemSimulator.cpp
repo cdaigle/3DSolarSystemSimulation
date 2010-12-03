@@ -22,13 +22,12 @@ using namespace std;
 #define NUM_STARS 2
 #define NUM_PLANETS 9
 #define NUM_RINGS 2
-#define NUM_SATELLITES 3
+#define NUM_SATELLITES 2
 
 #define NUM_VIEWMODES 3
 
 //Global values
 int static winWidth = 1000, winHeight = 650;
-double static outerRadiusBound;
 
 double static hoursPassed = -1.0;
 bool static simulationRunning = false;
@@ -41,9 +40,9 @@ int static viewId = 0;
 
 ViewMode views[NUM_VIEWMODES] = 
 {
-	ViewMode("SolarSystemView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 1000.0, 50.0, 9.93, -1, 0.0000030, 0.0000005, 0.30, 0.01),
-	ViewMode("PlanetView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 2, 1.0, 9.93, 2, 0.0000030, 0.0000005, 0.30, 0.01),
-	ViewMode("MoonView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 5, 1.0, 9.93, 9, 0.0000030, 0.0000005	, 0.30, 0.01)
+	ViewMode("SolarSystemView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 1000.0, 50.0, 9.93, -1, 0.0000030, 0.0000005, 0.0000005, 0.0000001),
+	ViewMode("PlanetView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 2, 1.0, 9.93, 2, 0.0000030, 0.0000005, 0.0000005, 0.0000001),
+	ViewMode("MoonView", 0.0000105, 0.0000001, 0.00000122, 0.00000001, 0.0000000177, 0.0000000001, 5, 1.0, 9.93, 9, 0.0000030, 0.0000005, 0.0000005, 0.0000001)
 };
 
 #include "sphere.cpp"
@@ -75,17 +74,15 @@ Ring rings[NUM_RINGS] =
 
 Satellite satellites[NUM_SATELLITES] =
 {
-	Satellite("Moon", 3476.0, 384400.0, 0.1, 27.32, 5.14, 0.05, "moonmap.bmp", 2),                   //Earth's Moon
-	Satellite("Phobos", 2222.2, 9378.0, 0.1, 0.32, 1.00, 0.02, "phobosmap.bmp", 3),                  //Mar's Satellite     (one of them)
-	Satellite("Europa", 3569.0, 999999999999999999999.0, 0.1, 3.55, 0.47, 0.01, "europamap.bmp", 4)  //Jupiter's Satellite (one of them)
+	Satellite("Moon", 3476.0, 384400.0, 0.1, 27.32, 5.14, 0.05, "moonmap.bmp", 2),
+	// Diameter scaled from 22.2km to 3222.2km, Orbit scaled from 9378.0km to 293780.0km
+	Satellite("Phobos", 3222.2, 293780.0, 0.1, 0.32, 1.00, 0.02, "phobosmap.bmp", 3)
 };
-
-//outerRadiusBound = ((planets[NUM_PLANETS-1].getOrbitDistance() + 75) / views[viewId].starRadiusScale);
 
 Star stars[NUM_STARS] =
 {
-	Star("Stars", 200/views[viewId].starRadiusScale, 0.0, 1.0, "stars.bmp"),  //Stars
-	Star("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp")            //Sun
+	Star("Stars", 1000/views[viewId].starRadiusScale, 0.0, 1.0, "stars.bmp"),  //Stars
+	Star("Sun", 695000.0, 0.0, 1.0, "sunmap.bmp")                              //Sun
 };
 
 RGBpixmap starPixmaps[NUM_STARS];

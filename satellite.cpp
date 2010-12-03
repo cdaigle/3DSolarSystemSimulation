@@ -7,7 +7,7 @@
 
 double Satellite :: getOrbitX(double theta)
 {
-	return cos(theta) * views[viewId].satelliteOrbitScale;
+	return cos(theta) * getSemiMajorAxis();
 }
 
 double Satellite :: getOrbitY(double theta)
@@ -17,7 +17,17 @@ double Satellite :: getOrbitY(double theta)
 
 double Satellite :: getOrbitZ(double theta)
 {
-	return sin(theta) * views[viewId].satelliteOrbitScale;
+	return sin(theta)*getSemiMinorAxis();
+}
+
+double Satellite :: getSemiMajorAxis()
+{
+	return getOrbitDistance();
+}
+
+double Satellite :: getSemiMinorAxis()
+{
+	return getSemiMajorAxis()*sqrt(1 - pow(eccentricity, 2));
 }
 
 void Satellite :: draw()

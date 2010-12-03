@@ -19,6 +19,10 @@ class ViewMode
 		double hourIncrement;
 		double hourIncrementModifier;
 		
+		double camIncrement;
+		
+		double scaleFactor;
+		
 		double initCameraDistance;
 
 		int lookAtId;
@@ -63,9 +67,14 @@ class ViewMode
 			initCameraDistance = cD;
 
 			lookAtId = oBI;
+			
+			camIncrement = 1.0;
+			
 			initEyePos.set(-10.0f, 1.2f, 0.0f);
 			initLookPos.set(0.0f, 0.0f, 0.0f);
 			cam.init(initCameraDistance);
+			
+			scaleFactor = 0.5;
 		}
 		void incPlanetRadiusScale(void);
 		void decPlanetRadiusScale(void);
@@ -85,7 +94,15 @@ class ViewMode
 		void incHourIncrement(void);
 		void decHourIncrement(void);
 		
+		void incCamIncrement(void);
+		void decCamIncrement(void);
+		
+		void incScale(void);
+		void decScale(void);
+		
 		void setupCam(void);
+
+		void reset(void);
 		
 		string getName(void)
 		{

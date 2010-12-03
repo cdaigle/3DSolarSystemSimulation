@@ -7,22 +7,22 @@ static void keyboard(unsigned char key, int x, int y)
 	{
 		//Camera controls
 		case 'w':
-			views[viewId].cam.move(0.5);
+			views[viewId].cam.move(views[viewId].camIncrement);
 			break;
 		case 's':
-			views[viewId].cam.move(-0.5);
+			views[viewId].cam.move(-views[viewId].camIncrement);
 			break;
 		case 'a':
-			views[viewId].cam.swing(0.5);
+			views[viewId].cam.swing(views[viewId].camIncrement);
 			break;
 		case 'd':
-			views[viewId].cam.swing(-0.5);
+			views[viewId].cam.swing(-views[viewId].camIncrement);
 			break;
 		case '+':
-			views[viewId].cam.zoom(-0.5);
+			views[viewId].cam.zoom(-views[viewId].camIncrement);
 			break;
 		case '-':
-			views[viewId].cam.zoom(0.5);
+			views[viewId].cam.zoom(views[viewId].camIncrement);
 			break;
 		
 		//Turn simulation on/off
@@ -73,10 +73,7 @@ static void keyboard(unsigned char key, int x, int y)
 			}
 			break;
 		case '%':
-			if (satellites[2].isEnabled())
-			{
-				views[viewId].lookAtId = NUM_PLANETS+2;
-			}
+			//No Satellite
 			break;
 		case '^':
 			//No Satellite
@@ -105,12 +102,6 @@ static void keyboard(unsigned char key, int x, int y)
 			}
 			break;
 
-		case '_': 
-			views[viewId].decHourIncrement();
-			break;
-		case '=':
-			views[viewId].incHourIncrement();
-			break;
 		case '[':
 			views[viewId].decPlanetRadiusScale();
 			break;
@@ -129,51 +120,21 @@ static void keyboard(unsigned char key, int x, int y)
 		case '/':
 			views[viewId].incPlanetOrbitScale();
 			break;
-		case 'i':
+		case 'p':
 			views[viewId].incSatelliteRadiusScale();
 			break;
-		case 'I':
+		case 'o':
 			views[viewId].decSatelliteRadiusScale();
 			break;
-		case 'o':
+		case 'l':
 			views[viewId].incSatelliteOrbitScale();
 			break;
-		case 'O':
+		case 'k':
 			views[viewId].decSatelliteOrbitScale();
-			break;
-		
-		case 'p':
-			printf("hourIncrement: %e\n", views[viewId].hourIncrement);
-			printf("planetRadiusScale: %e\n", views[viewId].planetRadiusScale);
-			printf("starRadiusScale: %e\n", views[viewId].starRadiusScale);
-			printf("satelliteRadiusScale: %e\n", views[viewId].satelliteRadiusScale);
-			printf("orbitScale: %e\n", views[viewId].planetOrbitScale);
-			printf("satelliteOrbitScale: %e\n", views[viewId].satelliteOrbitScale);
-			printf("cameraDistance: %f\n", views[viewId].cam.distance);
-			printf("eyePosition: %f, %f, %f\n", views[viewId].cam.getEyePos().x, views[viewId].cam.getEyePos().y, views[viewId].cam.getEyePos().z );
 			break;
 		
 		case 27: //Esc key - exit
 			exit(0);
-			break;
-		
-		case 'l':
-			glEnable(GL_LIGHTING);
-			break;
-		case 'L':
-			glDisable(GL_LIGHTING);
-			break;
-		case 'k':
-			glEnable(GL_LIGHT0);
-			break;
-		case 'K':
-			glDisable(GL_LIGHT0);
-			break;
-		case 'j':
-			glEnable(GL_NORMALIZE);
-			break;
-		case 'J':
-			glDisable(GL_NORMALIZE);
 			break;
 	}
 	glutPostRedisplay();
@@ -185,27 +146,37 @@ static void keyboardSpecial(int key, int x, int y)
 	{
 		case GLUT_KEY_F1:
 			viewId = 0;
-			//views[viewId].set();
 			break;
 		case GLUT_KEY_F2:
 			viewId = 1;
-			//views[viewId].set();
 			break;
 		case GLUT_KEY_F3:
 			viewId = 2;
-			//views[viewId].set();
 			break;
+		case GLUT_KEY_F4:
+			views[viewId].reset();
+			break;
+			
 		case GLUT_KEY_LEFT:
-			keyboard('a', 0, 0);
-			break;			
+			views[viewId].decCamIncrement();
+			break;
 		case GLUT_KEY_RIGHT:
-			keyboard('d', 0, 0);
-			break;			
+			views[viewId].incCamIncrement();
+			break;
+			
 		case GLUT_KEY_DOWN:
-			keyboard('s', 0, 0);
+			views[viewId].decScale();
 			break;
 		case GLUT_KEY_UP:
-			keyboard('w', 0, 0);
+			views[viewId].incScale();
+			break;
+		
+		case GLUT_KEY_PAGE_UP:
+			views[viewId].incHourIncrement();
+			break;
+		case GLUT_KEY_PAGE_DOWN:
+			views[viewId].decHourIncrement();
 			break;
 	}
+	glutPostRedisplay();
 }

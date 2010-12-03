@@ -21,7 +21,7 @@ double Planet :: getOrbitZ(double theta)
 
 double Planet :: getSemiMajorAxis()
 {
-	return orbitDistance*views[viewId].planetOrbitScale; 
+	return getOrbitDistance(); 
 }
 
 double Planet :: getSemiMinorAxis()

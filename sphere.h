@@ -60,4 +60,8 @@ class Sphere
 		{
 			return radius * scale;
 		}
+		void setRadius(double radiusIn)
+		{
+			radius = radiusIn;
+		}
 };
