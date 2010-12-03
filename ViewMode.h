@@ -25,7 +25,7 @@ class ViewMode
 		
 		double initCameraDistance;
 
-		int lookAtId;
+		int lookAtId, originalLookAtId;
 		Point3 initEyePos;
 		Point3 initLookPos;
 		Camera cam;
@@ -65,7 +65,8 @@ class ViewMode
 			hourIncrementModifier = hIM;
 			
 			initCameraDistance = cD;
-
+			
+			originalLookAtId = oBI;;
 			lookAtId = oBI;
 			
 			camIncrement = 1.0;
@@ -74,7 +75,7 @@ class ViewMode
 			initLookPos.set(0.0f, 0.0f, 0.0f);
 			cam.init(initCameraDistance);
 			
-			scaleFactor = 0.5;
+			scaleFactor = 0.75;
 		}
 		void incPlanetRadiusScale(void);
 		void decPlanetRadiusScale(void);

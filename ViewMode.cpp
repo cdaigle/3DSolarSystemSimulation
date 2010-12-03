@@ -122,6 +122,8 @@ void ViewMode :: decScale()
 void ViewMode :: reset()
 {
 	setupCam();
+	lookAtId = originalLookAtId;
+	cam.distance = 5.0;
 }
 
 void ViewMode :: incCamIncrement()
