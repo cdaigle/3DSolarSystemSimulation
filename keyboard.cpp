@@ -140,6 +140,7 @@ static void keyboard(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
+//Special keys
 static void keyboardSpecial(int key, int x, int y)
 {
 	switch(key)

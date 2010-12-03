@@ -1,5 +1,5 @@
 /**
- * Init : contains init code for planet simulation
+ * Init : contains init code for solar system simulation
  */
 
 void setupLighting(void) {
@@ -7,14 +7,14 @@ void setupLighting(void) {
 	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
 	
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-	// set the light source properties (white)
-	GLfloat lightWhite_ambient[] = {0.5, 0.5, 0.5, 1.0f};
-	GLfloat lightWhite_diffuse[] = {0.9, 0.9, 0.7, 1.0f};
-	GLfloat lightWhite_specular[] = {1.0, 1.0, 1.0, 1.0f};
+	// set the light source properties
+	GLfloat light_ambient[] = {0.9, 0.9, 0.9, 1.0f};
+	GLfloat light_diffuse[] = {1.0, 1.0, 1.0, 1.0f};
+	GLfloat light_specular[] = {0.7, 0.7, 0.7, 1.0f};
 
-	glLightfv(GL_LIGHT0, GL_AMBIENT, lightWhite_ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightWhite_diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, lightWhite_specular);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -52,7 +52,7 @@ void setupTextures(void) {
 }
 
 void setupCameras(void) {
-	//Set up the viewport and initial camera
+	//Set up the viewport and initial camera's (for each view mode)
 	glViewport(0, 0, winWidth, winHeight);
 	for (int i = 0; i < NUM_VIEWMODES; i++)
 	{

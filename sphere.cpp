@@ -29,24 +29,21 @@ void Sphere :: position()
 
 void Sphere :: rotate()
 {
-	glRotated(orbitDegree, rotationalAxis.x, rotationalAxis.y, rotationalAxis.z);
+	glRotated(rotationDegree, rotationalAxis.x, rotationalAxis.y, rotationalAxis.z);
 }
 
 void Sphere :: create(double radiusScale)
 {
 	applyTexture();
-	applyMaterial();
 	GLUquadricObj *quadratic = NULL;
 	quadratic = gluNewQuadric();                // Create A Pointer To The Quadric Object
 	gluQuadricDrawStyle(quadratic, GLU_FILL);
 	gluQuadricTexture(quadratic, GL_TRUE);      // Create Texture Coords
 	gluQuadricNormals(quadratic, GLU_SMOOTH);   // Create Smooth Normals
+	//Tilt the sphere
 	glRotated (tiltDegree, 1, 0, 0);
+	//Rotate to fix texture
 	glRotated (270, 1, 0, 0);
+	//Draw the sphere
 	gluSphere(quadratic, radius*radiusScale, 40, 40);
-}
-
-void Sphere :: applyMaterial()
-{
-	
 }

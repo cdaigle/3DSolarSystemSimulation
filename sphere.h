@@ -20,12 +20,13 @@ class Sphere
 			albeldo = albeldoIn;
 			texturePath = texturePathIn;
 			name = nameIn;
-			orbitDegree = 0.0;
+			rotationDegree = 0.0;
 			tiltDegree = tiltDegreeIn;
+			//set axis to rotate around
 			rotationalAxis.set(0.0, cos(tiltDegree*DEG2RAD), sin(tiltDegree*DEG2RAD));
 		}
 		int textureId;
-		double orbitDegree, orbitDistance, tiltDegree;
+		double rotationDegree, orbitDistance, tiltDegree;
 
 		// Implemented in sphere.cpp
 		void draw(double);
@@ -33,7 +34,6 @@ class Sphere
 		void rotate(void);
 		void create(double);
 		void applyTexture(void);
-		void applyMaterial(void);
 
 		// Implemented here
 		string getTexturePath(void)

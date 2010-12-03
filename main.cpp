@@ -89,13 +89,20 @@ static void PlanetsSubMenu (int value)
 	{
 		rings[abs(value+1)].toggle();
 	}
-	else if(value < NUM_PLANETS)
+	else if (value < NUM_PLANETS)
 	{
 		planets[value].toggle();
 	}
-	else
+	else if (value < 2*NUM_PLANETS)
 	{
 		planets[value-NUM_PLANETS].toggleOrbit();
+	}
+	else
+	{
+		if (planets[value-(2*NUM_PLANETS)].isEnabled())
+		{
+			views[viewId].lookAtId = value-(2*NUM_PLANETS);
+		}
 	}
 }
 
@@ -105,9 +112,16 @@ static void SatellitesSubMenu (int value)
 	{
 		satellites[value].toggle();
 	}
-	else
+	else if (value < (2*NUM_SATELLITES))
 	{
 		satellites[value-NUM_SATELLITES].toggleOrbit();
+	}
+	else
+	{
+		if (satellites[value - (2*NUM_SATELLITES)].isEnabled())
+		{
+			views[viewId].lookAtId = value - (2*NUM_SATELLITES);
+		}
 	}
 }
 
@@ -120,6 +134,9 @@ static void MainMenu(int value)
 			break;
 		case 2:
 			exit(1);
+			break;
+		case 3:
+			views[viewId].lookAtId = -1;
 			break;
 	}
 }
@@ -148,6 +165,7 @@ void createMenu() {
 	for (int i = 0; i < NUM_PLANETS; i++)
 	{
 		planetsSubMenu[i] = glutCreateMenu(PlanetsSubMenu);
+		glutAddMenuEntry("Move Camera To", i+(NUM_PLANETS*2));
 		glutAddMenuEntry("Show/Hide Planet", i);
 		glutAddMenuEntry("Show/Hide Orbital Path", i+NUM_PLANETS);
 		for (int j = 0; j < NUM_RINGS; j++)
@@ -177,6 +195,7 @@ void createMenu() {
 	for (int i = 0; i < NUM_SATELLITES; i++)
 	{
 		satellitesSubMenu[i] = glutCreateMenu(SatellitesSubMenu);
+		glutAddMenuEntry("Move Camera To", i+(NUM_SATELLITES*2));
 		glutAddMenuEntry("Show/Hide Satellite", i);
 		glutAddMenuEntry("Show/Hide Orbital Path", i+NUM_SATELLITES);
 	}
@@ -197,6 +216,7 @@ void createMenu() {
 	glutAddSubMenu("View Modes", viewModesMenu);
 	glutAddSubMenu("Planets",	 planetsMenu);
 	glutAddSubMenu("Satellites", satellitesMenu);
+	glutAddMenuEntry("Move Camera To Sun", 3);
 	glutAddMenuEntry("Start/Stop Simulation", 1);
 	glutAddMenuEntry("Quit", 2);
 
@@ -210,6 +230,7 @@ void display(void) {
 	
 		view.cam.setLookAt(getLookAt(view.lookAtId));
 		
+		//Make sure the outer "stars" sphere is always at 1/2 the far distance (radius)
 		stars[0].setRadius(500 / view.starRadiusScale);
 		
 		//Draw the stars
@@ -233,6 +254,7 @@ void display(void) {
 			if (planet.isEnabled())
 			{
 				glPushMatrix();
+					//Incline to be on same plane as planet
 					glRotated(planet.inclination, 0, 0, 1);
 					ring.draw(view.planetRadiusScale, planet.getCurrentPosition());
 				glPopMatrix();
@@ -247,6 +269,7 @@ void display(void) {
 			if (planet.isEnabled())
 			{
 				glPushMatrix();
+					//Incline to be on same plane as planet
 					glRotated(planet.inclination, 0, 0, 1);
 					sat.draw();
 					sat.drawOrbit();
@@ -262,7 +285,7 @@ void display(void) {
 //Actual function called for simulation
 static void simulate()
 {
-	static bool init = true;
+	static bool init = true; //first time
 	//If enabled, move planets and increment the time
 	if (simulationRunning == true || init == true)
 	{

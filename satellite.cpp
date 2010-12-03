@@ -5,16 +5,19 @@
 
 #include "satellite.h"
 
+//Get x coordinate of satellite's orbit at degree theta
 double Satellite :: getOrbitX(double theta)
 {
 	return cos(theta) * getSemiMajorAxis();
 }
 
+//Get y coordinate of satellite's orbit at degree theta
 double Satellite :: getOrbitY(double theta)
 {
 	return 0.0;
 }
 
+//Get z coordinate of satellite's orbit at degree theta
 double Satellite :: getOrbitZ(double theta)
 {
 	return sin(theta)*getSemiMinorAxis();
@@ -34,7 +37,7 @@ void Satellite :: draw()
 {
 	if( enabled == true ) {
 		glPushMatrix();
-			//glRotated(inclination, 1, 0, 0);
+			//glRotated(inclination, 1, 0, 0); //Causes a strange up/down motion when used
 			Sphere :: draw(views[viewId].satelliteRadiusScale);
 		glPopMatrix();
 	}
@@ -45,7 +48,7 @@ void Satellite :: drawOrbit()
 	if( enabled == true && orbitEnabled == true )
 	{
 		glPushMatrix();
-			//glRotated(inclination, 1, 0, 0);
+			//glRotated(inclination, 1, 0, 0); //Causes a strange up/down motion when used
 			glPushMatrix();
 				Point3 pt = getCurrentPosition();
 				glTranslated(planetPosition.x, planetPosition.y, planetPosition.z);

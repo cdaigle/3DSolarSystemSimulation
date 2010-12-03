@@ -4,16 +4,19 @@
  */
 #include "planet.h"
 
+//Get x coordinate of planet's orbit at degree theta
 double Planet :: getOrbitX(double theta)
 {
 	return cos(theta)*getSemiMajorAxis();
 }
 
+//Get y coordinate of planet's orbit at degree theta
 double Planet :: getOrbitY()
 {
 	return 0.0;
 }
 
+//Get z coordinate of planet's orbit at degree theta
 double Planet :: getOrbitZ(double theta)
 {
 	return sin(theta)*getSemiMinorAxis();
@@ -29,14 +32,17 @@ double Planet :: getSemiMinorAxis()
 	return getSemiMajorAxis()*sqrt(1 - pow(eccentricity, 2));
 }
 
-//Calculates the new position of the planet, based on the circularTime
+//Calculates the new position of the planet, based on the hoursPassed (and the initOrbitDegree)
 void Planet :: move()
 {
+	//Get theta
 	double theta = (((hoursPassed / 24) / daysToOrbit)+initOrbitDegree);
+	//Make sure theta is in the range 0 - 360
 	if (theta > 360.0)
 	{
 		theta -= 360.0;
 	}
+	//Change to negative to get orbits to go counterclockwise, and switch to radians
 	theta = -theta*DEG2RAD;
 	
 	setCurrentPosition(getOrbitX(theta),getOrbitY(),getOrbitZ(theta));
@@ -44,10 +50,11 @@ void Planet :: move()
 
 void Planet :: rotate()
 {
-	orbitDegree += ((views[viewId].hourIncrement / 24) / daysToRotate)*DEG2RAD*360;
-	if (orbitDegree > 360.0)
+	//Calculate new rotation degree
+	rotationDegree += ((views[viewId].hourIncrement / 24) / daysToRotate)*DEG2RAD*360;
+	if (rotationDegree > 360.0)
 	{
-		orbitDegree -= 360.0;
+		rotationDegree -= 360.0;
 	}
 }
 
